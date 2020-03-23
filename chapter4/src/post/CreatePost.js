@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 
-const CreatePost = ({ user, posts, setPosts }) => {
+const CreatePost = ({ user, posts, dispatch }) => {
   const [ title, setTitle ] = useState('')
   const [ content, setContent ] = useState('')
 
   const handleTitle = evt => setTitle(evt.target.value)
   const handleContent = evt => setContent(evt.target.value)
   const handleCreate = () => {
-    const newPost = { title, content, author: user }
-    setPosts([newPost, ...posts])
+    dispatch({ type: 'CREATE_POST', title, content, author: user })
   }
 
   return (
