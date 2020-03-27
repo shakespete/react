@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { StateContext } from '../contexts'
 
 import Login from './Login'
 import Logout from './Logout'
 import Register from './Register'
 
-const UserBar = ({ user, dispatch }) => {
-
+const UserBar = () => {
+  const { state } = useContext(StateContext)
+  const { user } = state
+  
   if (user) {
-    return <Logout user={user} dispatch={dispatch} />
+    return <Logout />
   } else {
     return (
       <React.Fragment>
-        <Login dispatch={dispatch} />
-        <Register dispatch={dispatch} />
+        <Login />
+        <Register />
       </React.Fragment>
 
     )

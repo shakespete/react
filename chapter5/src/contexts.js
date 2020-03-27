@@ -1,8 +1,12 @@
 import React from 'react'
 
-const ThemeContext = React.createContext({
+export const ThemeContext = React.createContext({
   primaryColor: 'deepskyblue',
   secondaryColor: 'coral'
 });
 
-export default ThemeContext;
+export const StateContext = React.createContext({
+  state: {},
+  dispatch: () => {}
+})
+

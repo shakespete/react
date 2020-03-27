@@ -5,7 +5,7 @@ import CreatePost from './post/CreatePost'
 import UserBar from './user/UserBar'
 import Header from './Header'
 
-import ThemeContext from './contexts'
+import { ThemeContext, StateContext } from './contexts'
 import ChangeTheme from './ChangeTheme'
 import appReducer from './reducers'
 
@@ -32,19 +32,21 @@ const App = () => {
   }, [user]);
 
   return (
-    <ThemeContext.Provider value={theme}>
-      <div style={{padding: 8}}>
-        <Header text="React Hooks" />
-        <ChangeTheme theme={theme} setTheme={setTheme} />
-        <br />
-        <UserBar user={user} dispatch={dispatch} />
-        <br />
-        {user && <CreatePost user={user} posts={posts} dispatch={dispatch} /> }
-        <br />
-        <hr />
-        <PostList posts={posts} />
-      </div>
-    </ThemeContext.Provider>
+    <StateContext.Provider value={{ state, dispatch }}>
+      <ThemeContext.Provider value={theme}>
+        <div style={{padding: 8}}>
+          <Header text="React Hooks" />
+          <ChangeTheme theme={theme} setTheme={setTheme} />
+          <br />
+          <UserBar />
+          <br />
+          {user && <CreatePost /> }
+          <br />
+          <hr />
+          <PostList />
+        </div>
+      </ThemeContext.Provider>
+    </StateContext.Provider>
   )
 }
 
