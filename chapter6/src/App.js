@@ -9,19 +9,19 @@ import { ThemeContext, StateContext } from './contexts'
 import ChangeTheme from './ChangeTheme'
 import appReducer from './reducers'
 
-const defaultPosts  = [
-  {title: '1', content: 'hello', author: 'obiwan'},
-  {title: '2', content: 'there', author: 'kenobi'}
-];
-
-
 const App = () => {
   const [ theme, setTheme ] = useState({
     primaryColor: 'deepskyblue',
     secondaryColor: 'coral'
   })
-  const [ state, dispatch ] = useReducer(appReducer, { user: '', posts: defaultPosts })
+  const [ state, dispatch ] = useReducer(appReducer, { user: '', posts: [] })
   const { user, posts } = state;
+
+  useEffect(() => {
+    fetch('http://localhost:3001/posts')
+      .then(result => result.json())
+      .then(posts => dispatch({ type: 'FETCH_POSTS', posts }))
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -54,3 +54,5 @@ export default App;
 
 
 // npx json-server --watch server/db.json
+
+// json-server --watch db.json --port 3001 --routes routes.json
