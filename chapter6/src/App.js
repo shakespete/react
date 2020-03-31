@@ -1,4 +1,5 @@
 import React, { useState, useReducer, useEffect } from 'react'
+import { useResource } from 'react-request-hook'
 
 import PostList from './post/PostList'
 import CreatePost from './post/CreatePost'
@@ -15,13 +16,24 @@ const App = () => {
     secondaryColor: 'coral'
   })
   const [ state, dispatch ] = useReducer(appReducer, { user: '', posts: [] })
-  const { user, posts } = state;
+  const { user, error } = state;
 
+  // useEffect(() => {
+  //   fetch('http://localhost:3001/posts')
+  //     .then(result => result.json())
+  //     .then(posts => dispatch({ type: 'FETCH_POSTS', posts }))
+  // }, []);
+
+  const [ posts, getPosts ] = useResource(() => ({
+    url: '/posts',
+    method: 'get'
+  }))
+  useEffect(getPosts, [])
   useEffect(() => {
-    fetch('http://localhost:3001/posts')
-      .then(result => result.json())
-      .then(posts => dispatch({ type: 'FETCH_POSTS', posts }))
-  }, []);
+    if (posts && posts.data) {
+      dispatch({ type: 'FETCH_POSTS', posts: posts.data })
+    }
+  }, [posts])
 
   useEffect(() => {
     if (user) {
