@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { StateContext } from '../contexts'
+import { useResource } from 'react-request-hook'
 
 const CreatePost = () => {
   const { state, dispatch } = useContext(StateContext)
@@ -7,10 +8,16 @@ const CreatePost = () => {
 
   const [ title, setTitle ] = useState('')
   const [ content, setContent ] = useState('')
+  const [ , createPost ] = useResource(({ title, content, author }) => ({
+    url: '/posts',
+    method: 'post',
+    data: { title, content, author }
+  }));
 
   const handleTitle = evt => setTitle(evt.target.value)
   const handleContent = evt => setContent(evt.target.value)
   const handleCreate = () => {
+    createPost({ title, content, author: user })
     dispatch({ type: 'CREATE_POST', title, content, author: user })
   }
 
