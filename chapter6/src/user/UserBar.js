@@ -2,8 +2,15 @@ import React, { useState, useContext } from 'react'
 import { StateContext } from '../contexts'
 
 import Login from './Login'
-import Logout from './Logout'
 import Register from './Register'
+const Logout = React.lazy(() => import('./Logout'))
+/*
+The import() function dynamically loads the Logout component
+from the Logout.js file. In contrast to the static import
+statement, this function only gets called when React.lazy
+triggers it, which means it will only be imported when the
+component is needed.
+*/
 
 const UserBar = () => {
   const { state } = useContext(StateContext)
