@@ -1,4 +1,7 @@
 import React, { useState, useReducer, useEffect } from 'react'
+import { Router, View } from 'react-navi'
+import { mount, route } from 'navi'
+
 import HeaderBar from './pages/HeaderBar'
 import HomePage from './pages/HomePage'
 import PostPage from './pages/PostPage'
@@ -35,14 +38,23 @@ const App = () => {
     }
   }, [user]);
 
+  const routes = mount({
+    '/': route({ view: <HomePage /> }),
+    '/view/:id': route(req => {
+      return { view: <PostPage id={req.params.id} /> }
+    }),
+  });
+
   return (
     <StateContext.Provider value={{ state, dispatch }}>
       <ThemeContext.Provider value={theme}>
-        <div style={{padding: 8}}>
-          <HeaderBar setTheme={setTheme} />
-          <hr />
-          <PostPage id={'react-hooks'} />
-        </div>
+        <Router routes={routes}>
+          <div style={{padding: 8}}>
+            <HeaderBar setTheme={setTheme} />
+            <hr />
+            <View />
+          </div>
+        </Router>
       </ThemeContext.Provider>
     </StateContext.Provider>
   )

@@ -8,8 +8,10 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "express": "^4.17.1",
+    "navi": "^0.14.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-navi": "^0.14.3",
     "react-request-hook": "^2.1.1",
     "react-scripts": "3.4.0"
   },

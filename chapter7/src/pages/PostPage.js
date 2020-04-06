@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useResource } from 'react-request-hook'
+import { Link } from 'react-navi'
 
 import Post from '../post/Post'
 
@@ -12,6 +13,7 @@ const PostPage = ({ id }) => {
 
   return (
     <div>
+      <div><Link href="/">Go back</Link></div>
       {(post && post.data)
         ? <Post {...post.data} />
         : 'Loading...'
