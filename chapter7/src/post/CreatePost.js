@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { StateContext } from '../contexts'
 import { useResource } from 'react-request-hook'
 
+import { useNavigation } from 'react-navi'
+
 const CreatePost = () => {
   const { state, dispatch } = useContext(StateContext)
   const { user } = state
@@ -13,9 +15,13 @@ const CreatePost = () => {
     method: 'post',
     data: { title, content, author }
   }));
+
+  const navigation = useNavigation()
+
   useEffect(() => {
     if (post && post.data) {
       dispatch({ type: 'CREATE_POST', ...post.data })
+      navigation.navigate(`/view/${post.data.id}`)
     }
   }, [post])
 

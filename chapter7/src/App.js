@@ -3,6 +3,7 @@ import { Router, View } from 'react-navi'
 import { mount, route } from 'navi'
 
 import HeaderBar from './pages/HeaderBar'
+import FooterBar from './pages/FooterBar'
 import HomePage from './pages/HomePage'
 import PostPage from './pages/PostPage'
 
@@ -53,6 +54,7 @@ const App = () => {
             <HeaderBar setTheme={setTheme} />
             <hr />
             <View />
+            <FooterBar />
           </div>
         </Router>
       </ThemeContext.Provider>
