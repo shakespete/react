@@ -2,6 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useAPIRegister } from '../hooks'
 import { useInput } from 'react-hookedup'
 
+const useRegisterEffect = (user, dispatch) => {
+  useEffect(() => {
+    if (user && user.data) {
+      dispatch({ type: 'REGISTER', username: user.data.username })
+    }
+  }, [dispatch, user])
+}
+
 const Register = () => {
   const dispatch = useDispatch()
   
@@ -10,11 +18,7 @@ const Register = () => {
   const { value: passwordRepeat, bindToInput: bindPasswordRepeat } = useInput('')
 
   const [ user, register ] = useAPIRegister()
-  useEffect(() => {
-    if (user && user.data) {
-      dispatch({ type: 'REGISTER', username: user.data.username })
-    }
-  }, [user])
+  useRegisterEffect(user, dispatch)
 
   return (
     <form onSubmit={e => { e.preventDefault(); register(username, password); }}>
