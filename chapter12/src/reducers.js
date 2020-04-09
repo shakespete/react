@@ -1,45 +1,50 @@
-function userReducer (state, action) {
-  switch (action.type) {
-      case 'LOGIN':
-      case 'REGISTER':
-          return action.username
-      
-      case 'LOGOUT':
-          return ''
-      
-      default:
-          return state
+import { generateID } from './api'
+
+function filterReducer (state, action) {
+  if (action.type === 'FILTER_TODOS') {
+    return action.filter
+  } else {
+    return state
   }
 }
 
-function postsReducer (state, action) {
+function todosReducer (state, action) {
   switch (action.type) {
-      case 'FETCH_POSTS':
-          return action.posts
+    case 'FETCH_TODOS':
+      return action.todos
 
-      case 'CREATE_POST':
-          const newPost = { title: action.title, content: action.content, author: action.author, id: action.id }
-          return [ newPost, ...state ]
-      
-      default:
-          return state
-  }
-}
+    case 'ADD_TODO':
+      const newTodo = {
+        id: generateID(),
+        title: action.title,
+        completed: false
+      }
+      return [ newTodo, ...state ]
 
-function errorReducer (state, action) {
-  switch (action.type) {
-      case 'POSTS_ERROR':
-          return 'Failed to fetch posts'
+    case 'TOGGLE_TODO':
+      return state.map(t => {
+        if (t.id === action.id) {
+          return { ...t, completed: !t.completed }
+        }
+        return t
+      }, [])
 
-      default:
-          return state
+    case 'REMOVE_TODO':
+      return state.filter(t => {
+        if (t.id === action.id) {
+          return false
+        }
+        return true
+      })
+
+    default:
+      return state
   }
 }
 
 export default function appReducer (state, action) {
   return {
-      user: userReducer(state.user, action),
-      posts: postsReducer(state.posts, action),
-      error: errorReducer(state.error, action)
+    todos: todosReducer(state.todos, action),
+    filter: filterReducer(state.filter, action)
   }
 }
