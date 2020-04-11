@@ -5,7 +5,6 @@ import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 
 import { Provider } from 'react-redux'
-import ConnectedApp from './containers/ConnectedApp'
 import store from './configureStore'
 
 /**
@@ -14,7 +13,7 @@ import store from './configureStore'
  */
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedApp />
+    <App />
   </Provider>,
   document.getElementById('root')
 )
