@@ -1,6 +1,14 @@
 import { generateID } from './api'
+import { combineReducers } from 'redux'
 
-function filterReducer (state, action) {
+/**
+ * 
+ * Each reducer needs to set its initial state by defining a default
+ * value in the function definition
+ * Each reducer needs to return the current state for unhandled actions
+ */
+
+const filter = (state = 'all', action) => {
   if (action.type === 'FILTER_TODOS') {
     return action.filter
   } else {
@@ -8,9 +16,10 @@ function filterReducer (state, action) {
   }
 }
 
-function todosReducer (state, action) {
+const todos = (state = [], action) => {
   switch (action.type) {
     case 'FETCH_TODOS':
+      console.log(action);
       return action.todos
 
     case 'ADD_TODO':
@@ -42,9 +51,5 @@ function todosReducer (state, action) {
   }
 }
 
-export default function appReducer (state, action) {
-  return {
-    todos: todosReducer(state.todos, action),
-    filter: filterReducer(state.filter, action)
-  }
-}
+const appReducer = combineReducers({ todos, filter })
+export default appReducer
