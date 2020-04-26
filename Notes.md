@@ -1,7 +1,7 @@
 
-Virtual DOM vs Actual DOM
+<h1><u>Virtual DOM vs Actual DOM</u></h1>
 
-*DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.
+<i>*DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
 
 The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation.
 
@@ -9,7 +9,7 @@ The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”
 
 In React, for every DOM object, there is a corresponding “virtual DOM object.” A virtual DOM object is a representation of a DOM object, like a lightweight copy. A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.
 
-Diffing
+<h3>Diffing</h3>
 
 When you render a JSX element, every single virtual DOM object gets updated.
 
@@ -21,7 +21,7 @@ By comparing the new virtual DOM with a pre-update version, React figures out ex
 
 Once React knows which virtual DOM objects have changed, then React updates those objects, and only those objects, on the real DOM.
 
-ReactElement
+<h3>ReactElement</h3>
 
 This is the primary type in React.
 
@@ -35,7 +35,7 @@ Once defined, ReactElements can be render into the “real” DOM. This is the m
 
 ReactElements are the basic items in React-ish virtual DOM. However, they are stateless, therefore don’t seem to be very helpful for us, the programmers.
 
-ReactComponent
+<h3>ReactComponent</h3>
 
 What differs ReactComponent from ReactElement is - ReactComponents are stateful.
 
