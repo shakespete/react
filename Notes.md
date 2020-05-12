@@ -1,3 +1,13 @@
+<h1>JavaScript</h1>
+
+<h3>Function Declarations</h3>
+A function declaration or function definition below starts with the function keyword which is followed by the name of the function.
+
+<h3>Function Expressions</h3>
+A function expression involves creating the function as a variable.</br>
+
+One thing to be aware of when making a decision between a function declaration and a function expression is that **function declarations are hoisted and function expressions are not**. In other words, you can invoke a function before you write a function declaration. You can not invoke a function created by a function expression.
+
 
 <h1><u>Virtual DOM vs Actual DOM</u></h1>
 
