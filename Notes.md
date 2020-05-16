@@ -12,13 +12,12 @@ One thing to be aware of when making a decision between a function declaration a
 
 <b>A function is considered a first-class member when it can be declared as a variable and sent to functions as an argument. These functions can even be returned from functions. This means that functions can do the same things that variables can do.</b>
 
-<h3></h3>
 <h3>Pure Functions</h3>
 A pure function is a function that returns a value that is computed based on its arguments. Pure functions take at least one argument and always return a value or another function. They do not cause side effects, set global variables, or change anything about application state. They treat their arguments as immutable data.
 
 <h3>Array.filter</h3>
 Array.filter is a built-in JavaScript function that produces a new array from a source array. This function takes a predicate as its only argument. A predicate is a function that always returns a Boolean value: true or false. Array.filter invokes this predicate once for every item in the array. That item is passed to the predicate as an argument and the return value is used to decide if that item shall be added to the new array.
-
+<br />
 ```
 const schools = ["Yorktown", "Washington & Lee", "Wakefield"];
 
@@ -26,8 +25,116 @@ const wSchools = schools.filter(school => school[0] === "W");
 console.log(wSchools);
 // ["Washington & Lee", "Wakefield"]
 ```
+<br />
 
-<h1>Virtual DOM vs Actual DOM<</h1>
+<h3>Array.map</h3>
+Array.map method takes a function as its argument. This function will be invoked once for every item in the array, and whatever it returns will be added to the new array.  The map function can produce an array of objects, values, arrays, other functions—any JavaScript type.
+<br />
+```
+const highSchools = schools.map(school => `${school} High School`);
+
+console.log(highSchools.join("\n"));
+
+// Yorktown High School
+// Washington & Lee High School
+// Wakefield High School
+
+console.log(schools.join("\n"));
+
+// Yorktown
+// Washington & Lee
+// Wakefield
+```
+<br />
+
+<h3>Object.keys</h3>
+Object.keys is a method that can be used to return an array of keys from an object.
+<br />
+```
+const schools = {
+  Yorktown: 10,
+  "Washington & Lee": 2,
+  Wakefield: 5
+};
+
+const schoolArray = Object.keys(schools).map(key => ({
+  name: key,
+  wins: schools[key]
+}));
+
+console.log(schoolArray);
+
+// [
+// {
+// name: "Yorktown",
+// wins: 10
+// },
+// {
+// name: "Washington & Lee",
+// wins: 2
+// },
+// {
+// name: "Wakefield",
+// wins: 5
+// }
+// ]
+
+```
+<br />
+
+<h3>Object.reduce</h3>
+The reduce and reduceRight functions can be used to transform an array into any value, including a number, string, boolean, object, or even a function. reduce takes two arguments: a callback function and an original value. The callback is invoked once for every item in the array. Array.reduceRight works the same way as Array.reduce; the difference is that it starts reducing from the end of the array rather than the beginning.
+```
+<br />
+
+```
+const ages = [21, 18, 42, 40, 64, 63, 34];
+
+const maxAge = ages.reduce((max, age) => {
+  console.log(`${age} > ${max} = ${age > max}`);
+  if (age > max) {
+    return age;
+  } else {
+    return max;
+  }
+}, 0);
+
+console.log("maxAge", maxAge);
+
+// 21 > 0 = true
+// 18 > 21 = false
+// 42 > 21 = true
+// 40 > 42 = false
+// 64 > 42 = true
+// 63 > 64 = false
+// 34 > 64 = false
+// maxAge 64
+```
+<br />
+
+<h3>Higher-Order Functions</h3>
+Higher-order functions are functions that can manipulate other functions. They can take functions in as arguments, or return functions, or both. The first category of higher-order functions are functions that expect other functions as arguments. Array.map, Array.filter, and Array.reduce all take functions as arguments. They are higher-order functions.
+
+<h3>Composition</h3>
+Functional programs break up their logic into small pure functions that are focused on specific tasks. Eventually, you will need to put these smaller functions together. Specifically, you may need to combine them, call them in series or parallel, or compose them into larger functions until you eventually have an application.
+
+When it comes to composition, there are a number of different implementations, patterns, and techniques. One that you may be familiar with is chaining. In JavaScript, functions can be chained together using dot notation to act on the return value of the previous function.
+
+A more elegant approach is to create a higher order function we can use to compose functions into larger functions.
+
+<br />
+```
+const compose = (...fns) => arg =>
+  fns.reduce((composed, f) => f(composed), arg);
+```
+<br />
+
+The compose function is a higher order function. It takes functions as arguments and returns a single value.
+
+compose takes in functions as arguments and returns a single function. In this implementation, the spread operator is used to turn those function arguments into an array called fns. A function is then returned that expects one argument, arg. When this function is invoked, the fns array is piped starting with the argument we want to send through the function. The argument becomes the initial value for composed and then each iteration of the reduced callback returns. Notice that the callback takes two arguments: composed and a function f. Each function is invoked with compose which is the result of the previous function’s output. Eventually, the last function will be invoked and the last result returned.
+
+
+<h1>Virtual DOM vs Actual DOM</h1>
 
 <i>DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
 
