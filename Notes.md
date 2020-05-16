@@ -127,6 +127,16 @@ The compose function is a higher order function. It takes functions as arguments
 compose takes in functions as arguments and returns a single function. In this implementation, the spread operator is used to turn those function arguments into an array called fns. A function is then returned that expects one argument, arg. When this function is invoked, the fns array is piped starting with the argument we want to send through the function. The argument becomes the initial value for composed and then each iteration of the reduced callback returns. Notice that the callback takes two arguments: composed and a function f. Each function is invoked with compose which is the result of the previous function’s output. Eventually, the last function will be invoked and the last result returned.
 
 
+<h1>webpack</h1>
+webpack is billed as a module bundler. A module bundler takes all of our different files (JavaScript, LESS, CSS, JSX, ESNext, and so on) and turns them into a single file. The two main benefits of bundling are modularity and network performance.
+
+As of version 4.0.0, webpack does not require a configuration file to bundle your project. If you don’t include a config file, webpack will run the defaults to package your code. Using a config file though means that you’ll be able to customize your setup. Plus, this shows us some of the magic of webpack instead of hiding it away. The default webpack configuration file is always webpack.config.js.
+
+The webpack.config.js file is just another module that exports a JavaScript literal object that describes the actions that webpack should take. The configuration file should be saved to the root folder of the project, right next to the index.js file
+
+Wherever webpack finds an import statement, it will find the associated module in the filesystem and include it in the bundle. Webpack will follow this import tree and include all of these necessary modules in our bundle. Traversal through all of these files is creates what is called a dependency graph.
+
+
 <h1>Virtual DOM vs Actual DOM</h1>
 
 <i>DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
@@ -172,3 +182,15 @@ ReactComponents turned out to be a great tool for designing dynamic HTML. They d
 Whenever a ReactComponent is changing the state, we want to make as little changes to the “real” DOM as possible. So this is how React deals with it. The ReactComponent is converted to the ReactElement. Now the ReactElement can be inserted to the virtual DOM, compared and updated fast and easily. How exactly - well, that’s the job of the diff algorithm. The point is - it’s done faster than it would be in the “regular” DOM.
 
 When React knows the diff - it’s converted to the low-level (HTML DOM) code, which is executed in the DOM. This code is optimised per browser.
+
+<h3>JSX</h3>
+When we pass the array of elements to a component, we need to surround it with curly braces. This is called a JavaScript expression, and we must use these when passing JavaScript values to components as properties. <b>Component properties will take two types: either a string or a JavaScript expression. JavaScript expressions can include arrays, objects, and even functions. In order to include them, you must surround them in curly braces.</b>
+
+JSX is JavaScript, so you can incorporate JSX directly inside of JavaScript functions.
+
+JSX looks clean and readable, but it can’t be interpreted with a browser. All JSX must be converted into createElement calls or factories. Luckily, there is an excellent tool for this task: Babel.
+
+JavaScript is an interpreted language: the browser interprets the code as text, so there is no need to compile JavaScript. However, not all browsers support the latest JavaScript syntax, and no browser supports JSX syntax. Since we want to use the latest features of JavaScript along with JSX, we are going to need a way to convert our fancy source code into something that the browser can interpret. This process is called compiling, and it is what Babel is designed to do.
+
+<h3>React Fragments</h3>
+React will not render two or more adjacent or sibling elements as a component, so we used to have to wrap these in an enclosing tag like a div. This led to a lot of unnecessary tags being created though, a bunch of wrappers without much purpose. If we use a React Fragment, we can mimic the behavior of a wrapper without actually creating a new tag.
