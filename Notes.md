@@ -6,12 +6,30 @@ A function declaration or function definition below starts with the function key
 <h3>Function Expressions</h3>
 A function expression involves creating the function as a variable.</br>
 </br>
-One thing to be aware of when making a decision between a function declaration and a function expression is that **function declarations are hoisted and function expressions are not**. In other words, you can invoke a function before you write a function declaration. You can not invoke a function created by a function expression.
+One thing to be aware of when making a decision between a function declaration and a function expression is that <b>function declarations are hoisted and function expressions are not</b>. In other words, you can invoke a function before you write a function declaration. You can not invoke a function created by a function expression.
 
+<h1>Functional Programming</h1>
 
-<h1><u>Virtual DOM vs Actual DOM</u></h1>
+<b>A function is considered a first-class member when it can be declared as a variable and sent to functions as an argument. These functions can even be returned from functions. This means that functions can do the same things that variables can do.</b>
 
-<i>*DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
+<h3></h3>
+<h3>Pure Functions</h3>
+A pure function is a function that returns a value that is computed based on its arguments. Pure functions take at least one argument and always return a value or another function. They do not cause side effects, set global variables, or change anything about application state. They treat their arguments as immutable data.
+
+<h3>Array.filter</h3>
+Array.filter is a built-in JavaScript function that produces a new array from a source array. This function takes a predicate as its only argument. A predicate is a function that always returns a Boolean value: true or false. Array.filter invokes this predicate once for every item in the array. That item is passed to the predicate as an argument and the return value is used to decide if that item shall be added to the new array.
+
+```
+const schools = ["Yorktown", "Washington & Lee", "Wakefield"];
+
+const wSchools = schools.filter(school => school[0] === "W");
+console.log(wSchools);
+// ["Washington & Lee", "Wakefield"]
+```
+
+<h1>Virtual DOM vs Actual DOM<</h1>
+
+<i>DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
 
 The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation.
 
