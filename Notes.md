@@ -4,8 +4,10 @@
 A function declaration or function definition below starts with the function keyword which is followed by the name of the function.
 
 <h3>Function Expressions</h3>
-A function expression involves creating the function as a variable.</br>
-</br>
+A function expression involves creating the function as a variable.
+
+<br />
+
 One thing to be aware of when making a decision between a function declaration and a function expression is that <b>function declarations are hoisted and function expressions are not</b>. In other words, you can invoke a function before you write a function declaration. You can not invoke a function created by a function expression.
 
 <h1>Functional Programming</h1>
@@ -17,30 +19,28 @@ A pure function is a function that returns a value that is computed based on its
 
 <h3>Array.filter</h3>
 Array.filter is a built-in JavaScript function that produces a new array from a source array. This function takes a predicate as its only argument. A predicate is a function that always returns a Boolean value: true or false. Array.filter invokes this predicate once for every item in the array. That item is passed to the predicate as an argument and the return value is used to decide if that item shall be added to the new array.
+
 <br />
 ```
 const schools = ["Yorktown", "Washington & Lee", "Wakefield"];
-
 const wSchools = schools.filter(school => school[0] === "W");
 console.log(wSchools);
 // ["Washington & Lee", "Wakefield"]
 ```
 <br />
 
+
 <h3>Array.map</h3>
 Array.map method takes a function as its argument. This function will be invoked once for every item in the array, and whatever it returns will be added to the new array.  The map function can produce an array of objects, values, arrays, other functions—any JavaScript type.
+
 <br />
 ```
 const highSchools = schools.map(school => `${school} High School`);
-
 console.log(highSchools.join("\n"));
-
 // Yorktown High School
 // Washington & Lee High School
 // Wakefield High School
-
 console.log(schools.join("\n"));
-
 // Yorktown
 // Washington & Lee
 // Wakefield
@@ -49,6 +49,7 @@ console.log(schools.join("\n"));
 
 <h3>Object.keys</h3>
 Object.keys is a method that can be used to return an array of keys from an object.
+
 <br />
 ```
 const schools = {
@@ -56,40 +57,34 @@ const schools = {
   "Washington & Lee": 2,
   Wakefield: 5
 };
-
 const schoolArray = Object.keys(schools).map(key => ({
   name: key,
   wins: schools[key]
 }));
-
 console.log(schoolArray);
-
 // [
-// {
-// name: "Yorktown",
-// wins: 10
-// },
-// {
-// name: "Washington & Lee",
-// wins: 2
-// },
-// {
-// name: "Wakefield",
-// wins: 5
-// }
+//  {
+//    name: "Yorktown",
+//    wins: 10
+//  },
+//  {
+//    name: "Washington & Lee",
+//    wins: 2
+//  },
+//  {
+//    name: "Wakefield",
+//    wins: 5
+//  }
 // ]
-
 ```
 <br />
 
 <h3>Object.reduce</h3>
 The reduce and reduceRight functions can be used to transform an array into any value, including a number, string, boolean, object, or even a function. reduce takes two arguments: a callback function and an original value. The callback is invoked once for every item in the array. Array.reduceRight works the same way as Array.reduce; the difference is that it starts reducing from the end of the array rather than the beginning.
-```
-<br />
 
+<br />
 ```
 const ages = [21, 18, 42, 40, 64, 63, 34];
-
 const maxAge = ages.reduce((max, age) => {
   console.log(`${age} > ${max} = ${age > max}`);
   if (age > max) {
@@ -98,9 +93,7 @@ const maxAge = ages.reduce((max, age) => {
     return max;
   }
 }, 0);
-
 console.log("maxAge", maxAge);
-
 // 21 > 0 = true
 // 18 > 21 = false
 // 42 > 21 = true
