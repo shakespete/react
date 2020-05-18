@@ -187,3 +187,12 @@ JavaScript is an interpreted language: the browser interprets the code as text, 
 
 <h3>React Fragments</h3>
 React will not render two or more adjacent or sibling elements as a component, so we used to have to wrap these in an enclosing tag like a div. This led to a lot of unnecessary tags being created though, a bunch of wrappers without much purpose. If we use a React Fragment, we can mimic the behavior of a wrapper without actually creating a new tag.
+
+
+
+
+<h4>NOTE:</h4> <b>react-scripts</b> was also created by Facebook and is where the real magic happens. It installs Babel, ESLint, webpack, and more, so that you don’t have to configure them manually.
+
+
+<h3>Pure Component</h3>
+A Pure Component is a function component that does not contain state and will render the same user interface given the same props.
