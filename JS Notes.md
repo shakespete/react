@@ -190,7 +190,6 @@ React will not render two or more adjacent or sibling elements as a component, s
 
 
 
-
 <h4>NOTE:</h4> <b>react-scripts</b> was also created by Facebook and is where the real magic happens. It installs Babel, ESLint, webpack, and more, so that you don’t have to configure them manually.
 
 
