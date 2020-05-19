@@ -95,3 +95,12 @@ The useLayoutEffect Hook is identical to the useEffect Hook, but it fires synchr
 Do not use this Hook unless it is really needed, which is only in certain edge cases. useLayoutEffect will block visual updates in the browser, and thus, is slower than useEffect.
 
 The rule here is to use useEffect first. If your mutation changes the appearance of the DOM node, which can cause it to flicker, you should use useLayoutEffect instead.
+
+<h3>useContext</h3>
+The useContext Hook accepts a context object and returns the current value for the context. When the context provider updates its value, the Hook will trigger a re-render with the latest value
+
+Using createContext we created a new instance of React context that we named ColorContext. The color context contains two components: the ColorContext.Provider and the ColorContext.Consumer. We need to use the provider to place the colors in state. We add data to context by setting the value property of the Provider.
+
+The Provider will only provide context values to it’s children. The useContext hooks requires the context instance to obtain values from it. In other words the context object itself needs to be passed to the Hook, not the consumer or provider.
+
+The Consumer is accessed within the useContext hook, which means that we no longer have to work directly with the consumer component.
