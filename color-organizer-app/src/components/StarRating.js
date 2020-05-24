@@ -19,7 +19,10 @@ const StarRating = ({ totalStars = 5 }) => {
         <Star key={i} selected={selectedStars > i} />
       ))}
       <p>
-        {selectedStars} of {totalStars} stars
+        {selectedStars}
+        of
+        {totalStars}
+        stars
       </p>
     </>
   );
