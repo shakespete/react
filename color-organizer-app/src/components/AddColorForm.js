@@ -1,14 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 import useInput from "../hooks/useInput";
+import { useColors } from "../context/ColorProvider";
 
-const AddColorForm = ({ onNewColor }) => {
+const AddColorForm = () => {
   const [titleProps, resetTitle] = useInput("");
   const [colorProps, resetColor] = useInput("");
+  const { addColor } = useColors();
 
   const submit = (event) => {
     event.preventDefault();
-    onNewColor(titleProps.value, colorProps.value);
+    addColor(titleProps.value, colorProps.value);
     resetTitle();
     resetColor();
   };
@@ -25,12 +26,6 @@ const AddColorForm = ({ onNewColor }) => {
       <button type="submit">ADD</button>
     </form>
   );
-};
-AddColorForm.defaultProps = {
-  onNewColor: (f) => f,
-};
-AddColorForm.propTypes = {
-  onNewColor: PropTypes.func,
 };
 
 export default AddColorForm;
