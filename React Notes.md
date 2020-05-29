@@ -56,6 +56,8 @@ To avoid triggering the effect on every re-render, we can specify an array of va
 
 This array passed as the second argument is called the dependency array of the effect. If you want the effect to only trigger during mounting, and the cleanup function during unmounting, we can pass an empty array as the second argument.
 
+The render always comes before useEffect. The render happens first and then all effects run in order with full access to all of the values from the render. 
+
 <h3>useMemo</h3>
 The useMemo Hook takes a result of a function and memoizes it. This means that it will not be recomputed every time. This Hook can be used for performance optimizations.
 
@@ -89,12 +91,23 @@ The useRef Hook returns a ref object that can be assigned to a component or elem
 
 After assigning the ref to an element or component, the ref can be accessed via refContainer.current. If InitialValue is set, refContainer.current will be set to this value before assignment.
 
+When calling useRef(), you’re creating an object. This object is a container for storing any mutable value. Refs persist between renders but don’t trigger re-renders.
+
 <h3>useLayoutEffect</h3>
 The useLayoutEffect Hook is identical to the useEffect Hook, but it fires synchronously after all DOM mutations are completed and before the component is rendered in the browser.
 
 Do not use this Hook unless it is really needed, which is only in certain edge cases. useLayoutEffect will block visual updates in the browser, and thus, is slower than useEffect.
 
 The rule here is to use useEffect first. If your mutation changes the appearance of the DOM node, which can cause it to flicker, you should use useLayoutEffect instead.
+
+1) render
+2) useLayoutEffect is called
+3) Browser Paint: the time when the component’s elements are actually added to the DOM
+4) useEffect is called
+
+useLayoutEffect is invoked after the render, but before the browser paints the change. In most circumstances, useEffect is the write tool for the job, but if your effect is essential to the browser paint, you may want to use useLayoutEffect. For instance, you may want to obtain the with and height of an element when the window is resized.
+
+Another example of when to use useLayoutEffect is when tracking the position of the mouse.
 
 <h3>useContext</h3>
 The useContext Hook accepts a context object and returns the current value for the context. When the context provider updates its value, the Hook will trigger a re-render with the latest value
@@ -104,3 +117,6 @@ Using createContext we created a new instance of React context that we named Col
 The Provider will only provide context values to it’s children. The useContext hooks requires the context instance to obtain values from it. In other words the context object itself needs to be passed to the Hook, not the consumer or provider.
 
 The Consumer is accessed within the useContext hook, which means that we no longer have to work directly with the consumer component.
+
+
+

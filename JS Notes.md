@@ -1,5 +1,7 @@
 <h1>JavaScript</h1>
 
+<ul>In JavaScript, arrays, objects, and functions are the same only when they are the exact same instance.</ul>
+
 <h3>Function Declarations</h3>
 A function declaration or function definition below starts with the function keyword which is followed by the name of the function.
 
@@ -74,7 +76,7 @@ console.log(schoolArray);
 // ]
 ```
 
-<h3>Object.reduce</h3>
+<h3>Array.reduce</h3>
 The reduce and reduceRight functions can be used to transform an array into any value, including a number, string, boolean, object, or even a function. reduce takes two arguments: a callback function and an original value. The callback is invoked once for every item in the array. Array.reduceRight works the same way as Array.reduce; the difference is that it starts reducing from the end of the array rather than the beginning.
 
 ```
