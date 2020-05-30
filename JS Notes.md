@@ -1,6 +1,8 @@
 <h1>JavaScript</h1>
 
-<ul>In JavaScript, arrays, objects, and functions are the same only when they are the exact same instance.</ul>
+<ul>
+  <li>In JavaScript, arrays, objects, and functions are the same only when they are the exact same instance.</li>
+</ul>
 
 <h3>Function Declarations</h3>
 A function declaration or function definition below starts with the function keyword which is followed by the name of the function.
@@ -196,4 +198,4 @@ React will not render two or more adjacent or sibling elements as a component, s
 
 
 <h3>Pure Component</h3>
-A Pure Component is a function component that does not contain state and will render the same user interface given the same props.
+A Pure Component is a function component that does not contain state and will render the same user interface given the same props. In React, a Pure Component is a Component that always renders the same output, given the same properties.

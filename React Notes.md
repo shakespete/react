@@ -54,12 +54,21 @@ A cleanup function can be returned from the Hook, which will be called when the 
 
 To avoid triggering the effect on every re-render, we can specify an array of values as the second argument to the Hook. Only when any of these values change, the effect will get triggered again.
 
-This array passed as the second argument is called the dependency array of the effect. If you want the effect to only trigger during mounting, and the cleanup function during unmounting, we can pass an empty array as the second argument.
+This array passed as the second argument is called the dependency array of the effect. If you want the effect to only trigger during mounting, and the cleanup function during unmounting, we can pass an empty array as the second argument. The dependency array can be used to control when an effect is invoked. An empty dependency array causes the effect to only be invoked once after the initial render.
 
-The render always comes before useEffect. The render happens first and then all effects run in order with full access to all of the values from the render. 
+The render always comes before useEffect. The render happens first and then all effects run in order with full access to all of the values from the render.
+
+We use useEffect when a render needs to cause side effects. Think of a side effect as something that a function does that isn’t part of the return. But we might want the component to do more than that. Those things we want the component to do other than return UI are called effects.
+
+Every time we render, useEffect has access to the latest values from that render: props, state, refs, etc. Think of useEffect as being a function that happens after a render. When a render fires, we can take a look at that render’s values and use them in the effect. Then once we render again, the whole thing starts over. New values, then new renders, then new effects.
+
+If you return a function from the effect, the function will be invoked when the component is removed from the tree
+
+<h3>memo</h3>
+The memo function can be used to create a component that will only render when its properties change. The second argument sent to the memo function is a predicate. A predicate is a function that only returns true or false. 
 
 <h3>useMemo</h3>
-The useMemo Hook takes a result of a function and memoizes it. This means that it will not be recomputed every time. This Hook can be used for performance optimizations.
+The useMemo Hook takes a result of a function and memoizes it. This means that it will not be recomputed every time. This Hook can be used for performance optimizations. In a memoized function, the result of a function call is saved and cached. Then when the function is called again with the same inputs, the cached value is returned.
 
 *useMemo runs during rendering, so make sure the computation function does not cause any side effects, such as resource requests. Side effects should be put into a useEffect Hook.*
 
