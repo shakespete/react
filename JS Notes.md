@@ -1,6 +1,7 @@
 <h1>JavaScript</h1>
 
 <ul>
+  <li>JavaScript always passes by value. However, with objects (Object, Array, Function), the value is a reference to the object.</li>
   <li>In JavaScript, arrays, objects, and functions are the same only when they are the exact same instance.</li>
 </ul>
 
@@ -199,3 +200,6 @@ React will not render two or more adjacent or sibling elements as a component, s
 
 <h3>Pure Component</h3>
 A Pure Component is a function component that does not contain state and will render the same user interface given the same props. In React, a Pure Component is a Component that always renders the same output, given the same properties.
+
+<h3>Saving Data Locally</h3>
+We can save data locally to the browser using the Web Storage API. Data can be saved by either using the window.localStorage or window.sessionStorage objects. The sessionStorage API only saves data for the user’s session. Closing the tabs or restarting the browser will clear any data saved to sessionStorage. On the other hand, localStorage will save data indefinitely until you remove it. Loading data from web storage, saving data to web storage, stringifying data, and parsing JSON strings… all of these tasks are synchronous.
