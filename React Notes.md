@@ -128,4 +128,14 @@ The Provider will only provide context values to it’s children. The useContext
 The Consumer is accessed within the useContext hook, which means that we no longer have to work directly with the consumer component.
 
 
+<h2>React Testing</h2>
+
+
+
+
+
+<h3>Render Prop</h3>
+Render props are exactly what they sound like, they are properties that are rendered. This can mean components that are sent as properties that are rendered when specific conditions are met, or it can mean function properties that return components that will be rendered. In the second case, when they are functions, data can be passed as arguments and used when rendering the returned component.
+
+A render prop can contain a component to render when a particular condition has been met.
 
