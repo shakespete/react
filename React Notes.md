@@ -130,6 +130,22 @@ The Consumer is accessed within the useContext hook, which means that we no long
 
 <h2>React Testing</h2>
 
+<h3>Testing React Components</h3>
+React components provide instructions for React to follow when creating and managing updates to the DOM. We can test these components by rendering them and checking the resulting DOM.
+
+We are not running our tests in a browser; we are running them in the terminal with Node.js. Node.js does not have the DOM API that comes standard with each browser. Jest incorporates an npm package called jsdom that is used to simulate a browser environment in Node.js, which is essential for testing React components.
+
+The documentation provides more detail about all of the custom matchers that are available to that you can test exactly what you want to test: https://github.com/testing-library/jest-dom#custom-matchers.
+
+Testing Library is an umbrella over many testing packages for libraries like Vue, Svelte, Reason, Angular, and more. It’s not just for React.
+
+If we want the component to render, a function that is part of React Testing Library, render, will help us do just that. render will replace our need to use ReactDOM.render(). render will take in one argument - the component or element that we want to render. The function returns an object of queries that can be used to check in with values in that component or element.
+
+Code coverage is the process of reporting on how many lines of code have actually been tested. It provides a metric that can help you decide when you have written enough tests.
+
+To run Jest with code coverage, simply add the coverage flag when you run the jest command:
+
+npm test -- --coverage
 
 
 
