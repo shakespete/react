@@ -1,3 +1,10 @@
+<h1>React</h1>
+<ul>
+  <li>React can be rendered isomorphically, which means that it can be in platforms other than the browser. This means we can render our UI on the server before it ever gets to the browser.</li>
+  <li>ReactDOM.render: Renders html directly in the browser</li>
+  <li>ReactDOM.renderToString: Renders html as a string, this allows us to render UI on the server.</li>
+</ul>
+
 <h1>Redux and Hooks</h1>
 
 Redux itself just deals with JavaScript objects, so it provides the store, deals with actions and action creators, and handles reducers.

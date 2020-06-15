@@ -3,6 +3,7 @@
 <ul>
   <li>JavaScript always passes by value. However, with objects (Object, Array, Function), the value is a reference to the object.</li>
   <li>In JavaScript, arrays, objects, and functions are the same only when they are the exact same instance.</li>
+  <li>Isomorphic applications are applications that can be rendered on multiple platforms. Universal code means that the exact same code can run in multiple environments.</li>
 </ul>
 
 <h3>Function Declarations</h3>
