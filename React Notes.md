@@ -157,11 +157,11 @@ To run Jest with code coverage, simply add the coverage flag when you run the je
 
 npm test -- --coverage
 
-
-
-
 <h3>Render Prop</h3>
 Render props are exactly what they sound like, they are properties that are rendered. This can mean components that are sent as properties that are rendered when specific conditions are met, or it can mean function properties that return components that will be rendered. In the second case, when they are functions, data can be passed as arguments and used when rendering the returned component.
 
 A render prop can contain a component to render when a particular condition has been met.
 
+<h1>React Hook Flow</h1>
+
+![alt text](https://raw.githubusercontent.com/donavon/hook-flow/master/hook-flow.png)
