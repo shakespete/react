@@ -55,12 +55,12 @@ selectorFn is a function that works similarly to the mapStateToProps function. I
 <h2>React Hooks</h2>
 
 <h3>useState</h3>
-The initialState argument is the state used during the initial render. In subsequent renders, it is disregarded. If the initial state is the result of an expensive computation, you may provide a function instead, which will be executed only on the initial render.
+Any time you use a function callback for useState, that function is only going to be called when the component is initially rendered for the rest of the lifetime of that component.
 
 <h3>useEffect</h3>
 The useEffect Hook accepts a function that contains code with side effects. The function passed to the Hook will run after the render is done and the component is on the screen.
 
-A cleanup function can be returned from the Hook, which will be called when the component unmounts and is used to, for example, clean up timers or subscriptions. The cleanup function will also be called before the effect is triggered again, when dependencies of the effect update.
+A cleanup function can be returned from the Hook, which will be called when the component unmounts and is used to, for example, clean up timers or subscriptions. The cleanup function will also be called before the effect is triggered again, when dependencies of the effect update. Also note that useEffect callbacks are only called if they have no dependencies listed or if they have a dependency listed and one of those dependencies changed.
 
 To avoid triggering the effect on every re-render, we can specify an array of values as the second argument to the Hook. Only when any of these values change, the effect will get triggered again.
 
@@ -72,7 +72,7 @@ We use useEffect when a render needs to cause side effects. Think of a side effe
 
 Every time we render, useEffect has access to the latest values from that render: props, state, refs, etc. Think of useEffect as being a function that happens after a render. When a render fires, we can take a look at that render’s values and use them in the effect. Then once we render again, the whole thing starts over. New values, then new renders, then new effects.
 
-If you return a function from the effect, the function will be invoked when the component is removed from the tree
+If you return a function from the effect, the function will be invoked when the component is removed from the tree.
 
 <h3>memo</h3>
 The memo function can be used to create a component that will only render when its properties change. The second argument sent to the memo function is a predicate. A predicate is a function that only returns true or false. 
