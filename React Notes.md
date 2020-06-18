@@ -54,6 +54,9 @@ selectorFn is a function that works similarly to the mapStateToProps function. I
 
 <h2>React Hooks</h2>
 
+<h3>useState</h3>
+The initialState argument is the state used during the initial render. In subsequent renders, it is disregarded. If the initial state is the result of an expensive computation, you may provide a function instead, which will be executed only on the initial render.
+
 <h3>useEffect</h3>
 The useEffect Hook accepts a function that contains code with side effects. The function passed to the Hook will run after the render is done and the component is on the screen.
 
