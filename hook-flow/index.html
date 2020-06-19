@@ -6,6 +6,9 @@
   <script type="text/babel">
     // https://github.com/donavon/hook-flow
 
+    /*
+    * Child Component
+    */
     function Child() {
       console.log('%c    Child: render start', 'color: MediumSpringGreen');
       // A useState Hook and console logging several useEffect Hooks
@@ -62,6 +65,10 @@
       return element;
     }
 
+
+    /*
+    * App Component
+    */
     function App() {
       console.log('%cApp: render start', 'color: MediumSpringGreen');
       // A boolean useState
