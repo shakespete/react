@@ -12,9 +12,11 @@
 </ul>
 
 <h3>Steps in developing a Redux application:</h3>
-1) Define the state
-2) Define the actions that are going to change the state
-3) Define the reducer functions which carry out the state modification
+<ol>
+  <li>Define the state</li>
+  <li>Define the actions that are going to change the state</li>
+  <li>Define the reducer functions which carry out the state modification</li>
+<ol>
 
 <h3>Action Creators</h3>
 <ul>
@@ -26,18 +28,13 @@
 This middleware checks if an action creator returned a function, rather than a plain object, and if that is the case, it executes that function, while passing the dispatch function to it as an argument.
 Using the redux-thunk middleware, we can now dispatch functions that will later dispatch actions, which means that our asynchronous action creator is going to work fine now.
 
-<strong>Redux reducers differ from Reducer Hooks in that they have certain conventions:</strong>
+**Redux reducers differ from Reducer Hooks in that they have certain conventions:**
 1) Each reducer needs to set its initial state by defining a default value in the function definition
 2) Each reducer needs to return the current state for unhandled actions
 
 Container components use a connector to connect Redux to a presentational component. This connector accepts two functions:
 1) **mapStateToProps(state):** Takes the current Redux state, and returns an object of props to be passed to the component; used to pass state to the component
 2) **mapDispatchToProps(dispatch):** Takes the dispatch function from the Redux store, and returns an object of props to be passed to the component; used to pass action creators to the component
-
-Container components use a connector to connect Redux to a presentational component. This connector accepts two functions:
-1) mapStateToProps(state): Takes the current Redux state, and returns an object of props to be passed to the component; used to pass state to the component
-2) mapDispatchToProps(dispatch): Takes the dispatch function from the Redux store, and returns an object of props to be passed to the component; used to pass action creators to the component
-
 
 <h2>Redux Hooks</h2>
 
