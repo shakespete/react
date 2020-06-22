@@ -1,32 +1,32 @@
 <h1>React</h1>
 <ul>
+  <li>React is declarative. In a declarative program, the syntax itself describes what should happen, and the details of how things happen are abstracted away.</li>
   <li>React can be rendered isomorphically, which means that it can be in platforms other than the browser. This means we can render our UI on the server before it ever gets to the browser.</li>
-  <li>ReactDOM.render: Renders html directly in the browser</li>
-  <li>ReactDOM.renderToString: Renders html as a string, this allows us to render UI on the server.</li>
 </ul>
 
 <h1>Redux and Hooks</h1>
-
-Redux itself just deals with JavaScript objects, so it provides the store, deals with actions and action creators, and handles reducers.
-React Redux provides connectors in order to connect Redux to our React components.
-Redux Thunk is a middleware that allows us to deal with asynchronous requests in Redux.
+<ul>
+  <li>Redux itself just deals with JavaScript objects, so it provides the store, deals with actions and action creators, and handles reducers.</li>
+  <li>React Redux provides connectors in order to connect Redux to our React components.</li>
+  <li>Redux Thunk is a middleware that allows us to deal with asynchronous requests in Redux.</li>
+</ul>
 
 <h3>Steps in developing a Redux application:</h3>
-
 1) Define the state
 2) Define the actions that are going to change the state
 3) Define the reducer functions which carry out the state modification
 
 <h3>Action Creators</h3>
-
-- Synchronous action creators: These simply return an action object
-- Asynchronous action creators: These return an async function, which will later dispatch an action
+<ul>
+  <li>Synchronous action creators: These simply return an action object</li>
+  <li>Asynchronous action creators: These return an async function, which will later dispatch an action</li>
+</ul>
 
 <h3>redux-thunk</h3>
 This middleware checks if an action creator returned a function, rather than a plain object, and if that is the case, it executes that function, while passing the dispatch function to it as an argument.
 Using the redux-thunk middleware, we can now dispatch functions that will later dispatch actions, which means that our asynchronous action creator is going to work fine now.
 
-**Redux reducers differ from Reducer Hooks in that they have certain conventions:**
+<strong>Redux reducers differ from Reducer Hooks in that they have certain conventions:</strong>
 1) Each reducer needs to set its initial state by defining a default value in the function definition
 2) Each reducer needs to return the current state for unhandled actions
 
@@ -112,6 +112,8 @@ After assigning the ref to an element or component, the ref can be accessed via 
 
 When calling useRef(), you’re creating an object. This object is a container for storing any mutable value. Refs persist between renders but don’t trigger re-renders.
 
+Updating a ref value is considered a side effect. This is the reason why you want to update your ref value in event handlers and effects and not during rendering (unless you are working on lazy initialization).
+
 <h3>useLayoutEffect</h3>
 The useLayoutEffect Hook is identical to the useEffect Hook, but it fires synchronously after all DOM mutations are completed and before the component is rendered in the browser.
 
@@ -156,6 +158,12 @@ Code coverage is the process of reporting on how many lines of code have actuall
 To run Jest with code coverage, simply add the coverage flag when you run the jest command:
 
 npm test -- --coverage
+
+<h3>ReactDOM</h3>
+<ul>
+  <li>ReactDOM.render: Renders html directly in the browser</li>
+  <li>ReactDOM.renderToString: Renders html as a string, this allows us to render UI on the server.</li>
+</ul>
 
 <h3>Render Prop</h3>
 Render props are exactly what they sound like, they are properties that are rendered. This can mean components that are sent as properties that are rendered when specific conditions are met, or it can mean function properties that return components that will be rendered. In the second case, when they are functions, data can be passed as arguments and used when rendering the returned component.

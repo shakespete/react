@@ -4,7 +4,8 @@
   <li>JavaScript always passes by value. However, with objects (Object, Array, Function), the value is a reference to the object.</li>
   <li>In JavaScript, arrays, objects, and functions are the same only when they are the exact same instance.</li>
   <li>Isomorphic applications are applications that can be rendered on multiple platforms. Universal code means that the exact same code can run in multiple environments.</li>
-  <li>JavaScript always passes by value. However, with objects, the value is a reference to the object.</li>
+  <li>Referential equality === (also called identity) means that the pointers for two objects are the same. That is to say the objects are contained in the same memory location which leads us to the fact that pointers reference to the same object. <strong>Identity</strong> determines whether two objects share the same memory address</li>
+  <li>Structural equality ==, in its turn, means that two objects have equivalent content. <strong>Equality</strong> determines if two objects contain the same state.</li>
 </ul>
 
 <h3>Function Declarations</h3>
