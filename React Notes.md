@@ -16,7 +16,7 @@
   <li>Define the state</li>
   <li>Define the actions that are going to change the state</li>
   <li>Define the reducer functions which carry out the state modification</li>
-<ol>
+</ol>
 
 <h3>Action Creators</h3>
 <ul>
