@@ -6,6 +6,8 @@
   <li>Isomorphic applications are applications that can be rendered on multiple platforms. Universal code means that the exact same code can run in multiple environments.</li>
   <li>Referential equality === (also called identity) means that the pointers for two objects are the same. That is to say the objects are contained in the same memory location which leads us to the fact that pointers reference to the same object. <strong>Identity</strong> determines whether two objects share the same memory address</li>
   <li>Structural equality ==, in its turn, means that two objects have equivalent content. <strong>Equality</strong> determines if two objects contain the same state.</li>
+  <li>When we write synchronous JavaScript code, we’re providing a list of instructions that execute immediately in order.</li>
+  <li>JavaScript asynchronous tasks do not block the main thread. JavaScript is free to do something else while we wait for the API to return data.</li>
 </ul>
 
 <h3>Function Declarations</h3>
@@ -14,12 +16,27 @@ A function declaration or function definition below starts with the function key
 <h3>Function Expressions</h3>
 A function expression involves creating the function as a variable. One thing to be aware of when making a decision between a function declaration and a function expression is that <b>function declarations are hoisted and function expressions are not</b>. In other words, you can invoke a function before you write a function declaration. You can not invoke a function created by a function expression.
 
+<h3>List Matching</h3>
+List matching occurs when commas take the place of elements that should be skipped.
+
+```
+const [, , thirdAnimal] = ["Horse", "Mouse", "Cat"];
+console.log(thirdAnimal); // Cat
+```
+
 <h1>Functional Programming</h1>
 
 <b>A function is considered a first-class member when it can be declared as a variable and sent to functions as an argument. These functions can even be returned from functions. This means that functions can do the same things that variables can do.</b>
 
 <h3>Pure Functions</h3>
-A pure function is a function that returns a value that is computed based on its arguments. Pure functions take at least one argument and always return a value or another function. They do not cause side effects, set global variables, or change anything about application state. They treat their arguments as immutable data.
+A pure function is a function that returns a value that is computed based on its arguments. Pure functions take at least one argument and always return a value or another function. They do not cause side effects, set global variables, or change anything about application state. They treat their arguments as immutable data. A pure function is a function that satisfies these two conditions:
+
+<ol>
+  <li>Given the same input, the function returns the same output.</li>
+  <li>The function doesn't cause side effects outside of the function's scope (i.e. mutate data outside the function or data supplied to the function).</li>
+</ol>
+
+Pure functions can mutate local data within the function as long as it satisfies the two conditions above.
 
 <h3>Array.filter</h3>
 Array.filter is a built-in JavaScript function that produces a new array from a source array. This function takes a predicate as its only argument. A predicate is a function that always returns a Boolean value: true or false. Array.filter invokes this predicate once for every item in the array. That item is passed to the predicate as an argument and the return value is used to decide if that item shall be added to the new array.
@@ -127,7 +144,6 @@ The compose function is a higher order function. It takes functions as arguments
 
 compose takes in functions as arguments and returns a single function. In this implementation, the spread operator is used to turn those function arguments into an array called fns. A function is then returned that expects one argument, arg. When this function is invoked, the fns array is piped starting with the argument we want to send through the function. The argument becomes the initial value for composed and then each iteration of the reduced callback returns. Notice that the callback takes two arguments: composed and a function f. Each function is invoked with compose which is the result of the previous function’s output. Eventually, the last function will be invoked and the last result returned.
 
-
 <h1>webpack</h1>
 webpack is billed as a module bundler. A module bundler takes all of our different files (JavaScript, LESS, CSS, JSX, ESNext, and so on) and turns them into a single file. The two main benefits of bundling are modularity and network performance.
 
@@ -137,72 +153,17 @@ The webpack.config.js file is just another module that exports a JavaScript lite
 
 Wherever webpack finds an import statement, it will find the associated module in the filesystem and include it in the bundle. Webpack will follow this import tree and include all of these necessary modules in our bundle. Traversal through all of these files is creates what is called a dependency graph.
 
+<h1>General</h1>
 
-<h1>Virtual DOM vs Actual DOM</h1>
+<h3>expression vs statement</h3>
+<ul>
+  <li>Expression: produces a value. They can be passed around to functions because the interpreter replaces them with the value they resolve to.</li>
+  <li>Statement: performs an action. Statements appear as instructions that do something but don't produce values.</li>
+  <li>Expression statement: produces a value and performs an action</li>
+</ul>
 
-<i>DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
+<strong>Rule of thumb:</strong> If you can print it or assign it to a variable, it’s an expression. If you can’t, it’s a statement.
 
-The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation.
-
-“virtual DOM” is more of a pattern than a specific technology.
-
-In React, for every DOM object, there is a corresponding “virtual DOM object.” A virtual DOM object is a representation of a DOM object, like a lightweight copy. A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.
-
-<h3>Diffing</h3>
-
-When you render a JSX element, every single virtual DOM object gets updated.
-
-This sounds incredibly inefficient, but the cost is insignificant because the virtual DOM can update so quickly.
-
-Once the virtual DOM has updated, React compares the virtual DOM with a virtual DOM snapshot that was taken right before the update.
-
-By comparing the new virtual DOM with a pre-update version, React figures out exactly which virtual DOM objects have changed. This process is called “diffing.”
-
-Once React knows which virtual DOM objects have changed, then React updates those objects, and only those objects, on the real DOM.
-
-<h3>ReactElement</h3>
-
-This is the primary type in React.
-
-A ReactElement is a light, stateless, immutable, virtual representation of a DOM Element.
-
-ReactElements lives in the virtual DOM. They make the basic nodes here. Their immutability makes them easy and fast to compare and update. This is the reason of great React performance.
-
-What can be a ReactElement? Almost every HTML tag - div, table, strong…
-
-Once defined, ReactElements can be render into the “real” DOM. This is the moment when React ceases to control the elements. They become slow, boring DOM nodes.
-
-ReactElements are the basic items in React-ish virtual DOM. However, they are stateless, therefore don’t seem to be very helpful for us, the programmers.
-
-<h3>ReactComponent</h3>
-
-What differs ReactComponent from ReactElement is - ReactComponents are stateful.
-
-ReactComponents turned out to be a great tool for designing dynamic HTML. They don’t have the access to the virtual DOM, but they can be easily converted to ReactElements.
-
-Whenever a ReactComponent is changing the state, we want to make as little changes to the “real” DOM as possible. So this is how React deals with it. The ReactComponent is converted to the ReactElement. Now the ReactElement can be inserted to the virtual DOM, compared and updated fast and easily. How exactly - well, that’s the job of the diff algorithm. The point is - it’s done faster than it would be in the “regular” DOM.
-
-When React knows the diff - it’s converted to the low-level (HTML DOM) code, which is executed in the DOM. This code is optimised per browser.
-
-<h3>JSX</h3>
-When we pass the array of elements to a component, we need to surround it with curly braces. This is called a JavaScript expression, and we must use these when passing JavaScript values to components as properties. <b>Component properties will take two types: either a string or a JavaScript expression. JavaScript expressions can include arrays, objects, and even functions. In order to include them, you must surround them in curly braces.</b>
-
-JSX is JavaScript, so you can incorporate JSX directly inside of JavaScript functions.
-
-JSX looks clean and readable, but it can’t be interpreted with a browser. All JSX must be converted into createElement calls or factories. Luckily, there is an excellent tool for this task: Babel.
-
-JavaScript is an interpreted language: the browser interprets the code as text, so there is no need to compile JavaScript. However, not all browsers support the latest JavaScript syntax, and no browser supports JSX syntax. Since we want to use the latest features of JavaScript along with JSX, we are going to need a way to convert our fancy source code into something that the browser can interpret. This process is called compiling, and it is what Babel is designed to do.
-
-<h3>React Fragments</h3>
-React will not render two or more adjacent or sibling elements as a component, so we used to have to wrap these in an enclosing tag like a div. This led to a lot of unnecessary tags being created though, a bunch of wrappers without much purpose. If we use a React Fragment, we can mimic the behavior of a wrapper without actually creating a new tag.
-
-
-
-<h4>NOTE:</h4> <b>react-scripts</b> was also created by Facebook and is where the real magic happens. It installs Babel, ESLint, webpack, and more, so that you don’t have to configure them manually.
-
-
-<h3>Pure Component</h3>
-A Pure Component is a function component that does not contain state and will render the same user interface given the same props. In React, a Pure Component is a Component that always renders the same output, given the same properties.
 
 <h3>Saving Data Locally</h3>
 We can save data locally to the browser using the Web Storage API. Data can be saved by either using the window.localStorage or window.sessionStorage objects. The sessionStorage API only saves data for the user’s session. Closing the tabs or restarting the browser will clear any data saved to sessionStorage. On the other hand, localStorage will save data indefinitely until you remove it. Loading data from web storage, saving data to web storage, stringifying data, and parsing JSON strings… all of these tasks are synchronous.

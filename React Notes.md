@@ -167,6 +167,67 @@ Render props are exactly what they sound like, they are properties that are rend
 
 A render prop can contain a component to render when a particular condition has been met.
 
+<h1>Virtual DOM vs Actual DOM</h1>
+<i>DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
+
+The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation.
+
+“virtual DOM” is more of a pattern than a specific technology.
+
+In React, for every DOM object, there is a corresponding “virtual DOM object.” A virtual DOM object is a representation of a DOM object, like a lightweight copy. A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.
+
+<h3>Diffing</h3>
+When you render a JSX element, every single virtual DOM object gets updated.
+
+This sounds incredibly inefficient, but the cost is insignificant because the virtual DOM can update so quickly.
+
+Once the virtual DOM has updated, React compares the virtual DOM with a virtual DOM snapshot that was taken right before the update.
+
+By comparing the new virtual DOM with a pre-update version, React figures out exactly which virtual DOM objects have changed. This process is called “diffing.”
+
+Once React knows which virtual DOM objects have changed, then React updates those objects, and only those objects, on the real DOM.
+
+<h3>ReactElement</h3>
+
+This is the primary type in React.
+
+A ReactElement is a light, stateless, immutable, virtual representation of a DOM Element.
+
+ReactElements lives in the virtual DOM. They make the basic nodes here. Their immutability makes them easy and fast to compare and update. This is the reason of great React performance.
+
+What can be a ReactElement? Almost every HTML tag - div, table, strong…
+
+Once defined, ReactElements can be render into the “real” DOM. This is the moment when React ceases to control the elements. They become slow, boring DOM nodes.
+
+ReactElements are the basic items in React-ish virtual DOM. However, they are stateless, therefore don’t seem to be very helpful for us, the programmers.
+
+<h3>ReactComponent</h3>
+
+What differs ReactComponent from ReactElement is - ReactComponents are stateful.
+
+ReactComponents turned out to be a great tool for designing dynamic HTML. They don’t have the access to the virtual DOM, but they can be easily converted to ReactElements.
+
+Whenever a ReactComponent is changing the state, we want to make as little changes to the “real” DOM as possible. So this is how React deals with it. The ReactComponent is converted to the ReactElement. Now the ReactElement can be inserted to the virtual DOM, compared and updated fast and easily. How exactly - well, that’s the job of the diff algorithm. The point is - it’s done faster than it would be in the “regular” DOM.
+
+When React knows the diff - it’s converted to the low-level (HTML DOM) code, which is executed in the DOM. This code is optimised per browser.
+
+<h3>JSX</h3>
+When we pass the array of elements to a component, we need to surround it with curly braces. This is called a JavaScript expression, and we must use these when passing JavaScript values to components as properties. <b>Component properties will take two types: either a string or a JavaScript expression. JavaScript expressions can include arrays, objects, and even functions. In order to include them, you must surround them in curly braces.</b>
+
+JSX is JavaScript, so you can incorporate JSX directly inside of JavaScript functions.
+
+JSX looks clean and readable, but it can’t be interpreted with a browser. All JSX must be converted into createElement calls or factories. Luckily, there is an excellent tool for this task: Babel.
+
+JavaScript is an interpreted language: the browser interprets the code as text, so there is no need to compile JavaScript. However, not all browsers support the latest JavaScript syntax, and no browser supports JSX syntax. Since we want to use the latest features of JavaScript along with JSX, we are going to need a way to convert our fancy source code into something that the browser can interpret. This process is called compiling, and it is what Babel is designed to do.
+
+<h3>React Fragments</h3>
+React will not render two or more adjacent or sibling elements as a component, so we used to have to wrap these in an enclosing tag like a div. This led to a lot of unnecessary tags being created though, a bunch of wrappers without much purpose. If we use a React Fragment, we can mimic the behavior of a wrapper without actually creating a new tag.
+
+<h4>NOTE:</h4> <b>react-scripts</b> was also created by Facebook and is where the real magic happens. It installs Babel, ESLint, webpack, and more, so that you don’t have to configure them manually.
+
+<h3>Pure Component</h3>
+A Pure Component is a function component that does not contain state and will render the same user interface given the same props. In React, a Pure Component is a Component that always renders the same output, given the same properties.
+
 <h1>React Hook Flow</h1>
 
 ![alt text](https://raw.githubusercontent.com/donavon/hook-flow/master/hook-flow.png)
