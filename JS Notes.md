@@ -8,6 +8,8 @@
   <li>Structural equality ==, in its turn, means that two objects have equivalent content. <strong>Equality</strong> determines if two objects contain the same state.</li>
   <li>When we write synchronous JavaScript code, we’re providing a list of instructions that execute immediately in order.</li>
   <li>JavaScript asynchronous tasks do not block the main thread. JavaScript is free to do something else while we wait for the API to return data.</li>
+  <li>Parameters are the variable names of the function definition, while arguments are the values given to a function when it is invoked.</li>
+  <li>In JavaScript, function arguments are references to the actual data.</li>
 </ul>
 
 <h3>Function Declarations</h3>
@@ -123,6 +125,59 @@ console.log("maxAge", maxAge);
 // 63 > 64 = false
 // 34 > 64 = false
 // maxAge 64
+```
+
+The ages array has been reduced into a single value: the maximum age, 64. reduce takes two arguments: a callback function and an original value. In this case, the original value is 0, which sets the initial maximum value to 0. The callback is invoked once for every item in the array. The first time this callback is invoked, age is equal to 21, the first value in the array, and max is equal to 0, the initial value. The callback returns the greater of the two numbers, 21, and that becomes the max value during the next iteration. Each iteration compares each age against the max value and returns the greater of the two. Finally, the last number in the array is compared and returned from the previous callback.
+
+```
+const colors = [
+  {
+    id: "xekare",
+    title: "rad red",
+    rating: 3
+  },
+  {
+    id: "jbwsof",
+    title: "big blue",
+    rating: 2
+  },
+  {
+    id: "prigbj",
+    title: "grizzly grey",
+    rating: 5
+  },
+  {
+    id: "ryhbhsl",
+    title: "banana",
+    rating: 1
+  }
+];
+
+const hashColors = colors.reduce((hash, { id, title, rating }) => {
+  hash[id] = { title, rating };
+  return hash;
+}, {});
+
+console.log(hashColors);
+
+// {
+//  "xekare": {
+//    title:"rad red",
+//    rating:3
+//  },
+//  "jbwsof": {
+//    title:"big blue",
+//    rating:2
+//  },
+//  "prigbj": {
+//    title:"grizzly grey",
+//    rating:5
+//  },
+//  "ryhbhsl": {
+//    title:"banana",
+//    rating:1
+//  }
+// }
 ```
 
 <h3>Higher-Order Functions</h3>
