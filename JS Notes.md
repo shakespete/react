@@ -2,6 +2,7 @@
 
 <ul>
   <li>JavaScript always passes by value. However, with objects (Object, Array, Function), the value is a reference to the object.</li>
+  <li>In JavaScript, function arguments are references to the actual data.</li>
   <li>In JavaScript, arrays, objects, and functions are the same only when they are the exact same instance.</li>
   <li>Isomorphic applications are applications that can be rendered on multiple platforms. Universal code means that the exact same code can run in multiple environments.</li>
   <li>Referential equality === (also called identity) means that the pointers for two objects are the same. That is to say the objects are contained in the same memory location which leads us to the fact that pointers reference to the same object. <strong>Identity</strong> determines whether two objects share the same memory address</li>
@@ -9,7 +10,6 @@
   <li>When we write synchronous JavaScript code, we’re providing a list of instructions that execute immediately in order.</li>
   <li>JavaScript asynchronous tasks do not block the main thread. JavaScript is free to do something else while we wait for the API to return data.</li>
   <li>Parameters are the variable names of the function definition, while arguments are the values given to a function when it is invoked.</li>
-  <li>In JavaScript, function arguments are references to the actual data.</li>
 </ul>
 
 <h3>Function Declarations</h3>
