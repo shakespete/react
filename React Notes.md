@@ -75,7 +75,7 @@ If you return a function from the effect, the function will be invoked when the 
 The memo function can be used to create a component that will only render when its properties change. The second argument sent to the memo function is a predicate. A predicate is a function that only returns true or false. 
 
 <h3>useMemo</h3>
-The useMemo Hook takes a result of a function and memoizes it. This means that it will not be recomputed every time. This Hook can be used for performance optimizations. In a memoized function, the result of a function call is saved and cached. Then when the function is called again with the same inputs, the cached value is returned.
+<p>The useMemo Hook takes a result of a function and memoizes it. This means that it will not be recomputed every time. This Hook can be used for performance optimizations. In a memoized function, the result of a function call is saved and cached. Then when the function is called again with the same inputs, the cached value is returned.</p>
 
 <strong>useMemo runs during rendering, so make sure the computation function does not cause any side effects, such as resource requests. Side effects should be put into a useEffect Hook.</strong>
 
@@ -107,16 +107,16 @@ The useRef Hook returns a ref object that can be assigned to a component or elem
 
 After assigning the ref to an element or component, the ref can be accessed via refContainer.current. If InitialValue is set, refContainer.current will be set to this value before assignment.
 
-When calling useRef(), you’re creating an object. This object is a container for storing any mutable value. Refs persist between renders but don’t trigger re-renders.
+<strong>When calling useRef(), you’re creating an object. This object is a container for storing any mutable value. Refs persist between renders but don’t trigger re-renders.</strong>
 
 Updating a ref value is considered a side effect. This is the reason why you want to update your ref value in event handlers and effects and not during rendering (unless you are working on lazy initialization).
 
 <h3>useLayoutEffect</h3>
-The useLayoutEffect Hook is identical to the useEffect Hook, but it fires synchronously after all DOM mutations are completed and before the component is rendered in the browser.
+The useLayoutEffect Hook is identical to the useEffect Hook, but it fires synchronously after all DOM mutations are completed and before the component is painted on the browser.
 
 Do not use this Hook unless it is really needed, which is only in certain edge cases. useLayoutEffect will block visual updates in the browser, and thus, is slower than useEffect.
 
-The rule here is to use useEffect first. If your mutation changes the appearance of the DOM node, which can cause it to flicker, you should use useLayoutEffect instead.
+<strong>The rule here is to use useEffect first. If your mutation changes the appearance of the DOM node, which can cause it to flicker, you should use useLayoutEffect instead.</strong>
 
 1) render
 2) useLayoutEffect is called
@@ -154,7 +154,7 @@ Code coverage is the process of reporting on how many lines of code have actuall
 
 To run Jest with code coverage, simply add the coverage flag when you run the jest command:
 
-npm test -- --coverage
+<b>npm test -- --coverage</b>
 
 <h3>ReactDOM</h3>
 <ul>
@@ -168,9 +168,9 @@ Render props are exactly what they sound like, they are properties that are rend
 A render prop can contain a component to render when a particular condition has been met.
 
 <h1>Virtual DOM vs Actual DOM</h1>
-<i>DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
+<p>The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation.</p>
 
-The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation.
+<i>DOM stands for Document Object Model and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called HTML DOM. Elements of HTML become nodes in the DOM.</i>
 
 “virtual DOM” is more of a pattern than a specific technology.
 
@@ -212,9 +212,11 @@ Whenever a ReactComponent is changing the state, we want to make as little chang
 When React knows the diff - it’s converted to the low-level (HTML DOM) code, which is executed in the DOM. This code is optimised per browser.
 
 <h3>JSX</h3>
-When we pass the array of elements to a component, we need to surround it with curly braces. This is called a JavaScript expression, and we must use these when passing JavaScript values to components as properties. <b>Component properties will take two types: either a string or a JavaScript expression. JavaScript expressions can include arrays, objects, and even functions. In order to include them, you must surround them in curly braces.</b>
+When we pass the array of elements to a component, we need to surround it with curly braces. This is called a JavaScript expression, and we must use these when passing JavaScript values to components as properties.
 
-JSX is JavaScript, so you can incorporate JSX directly inside of JavaScript functions.
+<strong>Component properties will take two types: either a string or a JavaScript expression. JavaScript expressions can include arrays, objects, and even functions. In order to include them, you must surround them in curly braces.</strong>
+
+<p>JSX is JavaScript, so you can incorporate JSX directly inside of JavaScript functions.</p>
 
 JSX looks clean and readable, but it can’t be interpreted with a browser. All JSX must be converted into createElement calls or factories. Luckily, there is an excellent tool for this task: Babel.
 
