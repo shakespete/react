@@ -63,7 +63,7 @@ To avoid triggering the effect on every re-render, we can specify an array of va
 
 This array passed as the second argument is called the dependency array of the effect. If you want the effect to only trigger during mounting, and the cleanup function during unmounting, we can pass an empty array as the second argument. The dependency array can be used to control when an effect is invoked. An empty dependency array causes the effect to only be invoked once after the initial render.
 
-The render always comes before useEffect. The render happens first and then all effects run in order with full access to all of the values from the render.
+<strong>The render always comes before useEffect. The render happens first and then all effects run in order with full access to all of the values from the render.</strong>
 
 We use useEffect when a render needs to cause side effects. Think of a side effect as something that a function does that isn’t part of the return. But we might want the component to do more than that. Those things we want the component to do other than return UI are called effects.
 
