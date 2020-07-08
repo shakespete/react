@@ -81,7 +81,7 @@ The memo function can be used to create a component that will only render when i
 
 The array passed as the second argument specifies the dependencies of the function. If any of these values change, the function will be recomputed; otherwise, the stored result will be used. If no array is provided, a new value will be computed on every render. If an empty array is passed, the value will only be computed once.
 
-useMemo is similar to useCallback except it allows you to apply memoization to any value type (not just functions). 
+useMemo is similar to useCallback except it allows you to apply memoization to any value type (not just functions). It does this by accepting a function which returns the value and then that function is only called when the value needs to be retrieved (which typically will only happen once each time an element in the dependencies array changes between renders).
 
 <h3>useCallback</h3>
 The useCallback Hook works similarly to the useMemo Hook. However, it returns a memoized callback function instead of a value. The function returned will only be redefined if one of the dependency values passed in the array of the second argument changes.
