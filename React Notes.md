@@ -61,7 +61,7 @@ A cleanup function can be returned from the Hook, which will be called when the 
 
 To avoid triggering the effect on every re-render, we can specify an array of values as the second argument to the Hook. Only when any of these values change, the effect will get triggered again.
 
-This array passed as the second argument is called the dependency array of the effect. If you want the effect to only trigger during mounting, and the cleanup function during unmounting, we can pass an empty array as the second argument. The dependency array can be used to control when an effect is invoked. An empty dependency array causes the effect to only be invoked once after the initial render.
+This array passed as the second argument is called the dependency array of the effect. If you want the effect to only trigger during mounting, and the cleanup function during unmounting, we can pass an empty array as the second argument. The dependency array can be used to control when an effect is invoked.
 
 <strong>The render always comes before useEffect. The render happens first and then all effects run in order with full access to all of the values from the render.</strong>
 
@@ -69,7 +69,7 @@ We use useEffect when a render needs to cause side effects. Think of a side effe
 
 Every time we render, useEffect has access to the latest values from that render: props, state, refs, etc. Think of useEffect as being a function that happens after a render. When a render fires, we can take a look at that render’s values and use them in the effect. Then once we render again, the whole thing starts over. New values, then new renders, then new effects.
 
-If you return a function from the effect, the function will be invoked when the component is removed from the tree.
+An empty dependency array causes the effect to only be invoked once after the initial render. Since there are no dependencies in the array, the effect is invoked for the initial render. No dependencies means no changes, so the effect will never be invoked again. Effects that are only invoked on the first render are extremely useful for initialization. If you return a function from the effect, the function will be invoked when the component is removed from the tree.
 
 <h3>memo</h3>
 The memo function can be used to create a component that will only render when its properties change. The second argument sent to the memo function is a predicate. A predicate is a function that only returns true or false. 
@@ -103,6 +103,8 @@ const memoizedCallback = useMemo(
 ```
 
 <h3>useRef</h3>
+In React, a ref is an object that stores values for the lifetime of a component.
+
 The useRef Hook returns a ref object that can be assigned to a component or element via the ref prop.
 
 After assigning the ref to an element or component, the ref can be accessed via refContainer.current. If InitialValue is set, refContainer.current will be set to this value before assignment.
@@ -110,6 +112,7 @@ After assigning the ref to an element or component, the ref can be accessed via 
 <strong>When calling useRef(), you’re creating an object. This object is a container for storing any mutable value. Refs persist between renders but don’t trigger re-renders.</strong>
 
 Updating a ref value is considered a side effect. This is the reason why you want to update your ref value in event handlers and effects and not during rendering (unless you are working on lazy initialization).
+
 
 <h3>useLayoutEffect</h3>
 The useLayoutEffect Hook is identical to the useEffect Hook, but it fires synchronously after all DOM mutations are completed and before the component is painted on the browser.
@@ -123,12 +126,51 @@ Do not use this Hook unless it is really needed, which is only in certain edge c
 3) Browser Paint: the time when the component’s elements are actually added to the DOM
 4) useEffect is called
 
-useLayoutEffect is invoked after the render, but before the browser paints the change. In most circumstances, useEffect is the write tool for the job, but if your effect is essential to the browser paint, you may want to use useLayoutEffect. For instance, you may want to obtain the with and height of an element when the window is resized.
+useLayoutEffect is invoked after the render, but before the browser paints the change. In most circumstances, useEffect is the write tool for the job, but if your effect is essential to the browser paint, you may want to use useLayoutEffect. For instance, you may want to obtain the with and height of an element when the window is resized. The width and height of the window is information that your component may need before the browser paints. useLayoutEffect is used to calculate the window’s width and height before the paint.
 
-Another example of when to use useLayoutEffect is when tracking the position of the mouse.
+```
+function useWindowSize {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  const resize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  };
+
+  useLayoutEffect(() => {
+    window.addEventListener("resize", resize);
+    resize();
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
+  return [width, height];
+};
+```
+
+<p>Another example of when to use useLayoutEffect is when tracking the position of the mouse.</p>
+
+```
+function useMousePosition {
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+
+  const setPosition = ({ x, y }) => {
+    setX(x);
+    setY(y);
+  };
+
+  useLayoutEffect(() => {
+    window.addEventListener("mousemove", setPosition);
+    return () => window.removeEventListener("mousemove", setPosition);
+  }, []);
+
+  return [x, y];
+};
+```
 
 <h3>useContext</h3>
-The useContext Hook accepts a context object and returns the current value for the context. When the context provider updates its value, the Hook will trigger a re-render with the latest value
+The useContext Hook accepts a context object and returns the current value for the context. When the context provider updates its value, the Hook will trigger a re-render with the latest value.
 
 Using createContext we created a new instance of React context that we named ColorContext. The color context contains two components: the ColorContext.Provider and the ColorContext.Consumer. We need to use the provider to place the colors in state. We add data to context by setting the value property of the Provider.
 
@@ -136,6 +178,7 @@ The Provider will only provide context values to it’s children. The useContext
 
 The Consumer is accessed within the useContext hook, which means that we no longer have to work directly with the consumer component.
 
+The context provider can place an object into context, but it can’t mutate the values in context on its own. It needs some help from a parent component. The trick is to create a stateful component that renders a context provider. When the state of the stateful component changes, it will rerender the context provider with new context data. Any of the context providers’ children will also be rerendered with the new context data. The stateful component that renders the context provider is our custom provider. That is: that’s the component that will be used when it’s time to wrap our App with the provider.
 
 <h2>React Testing</h2>
 
