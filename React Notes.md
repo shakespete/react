@@ -72,7 +72,8 @@ Every time we render, useEffect has access to the latest values from that render
 An empty dependency array causes the effect to only be invoked once after the initial render. Since there are no dependencies in the array, the effect is invoked for the initial render. No dependencies means no changes, so the effect will never be invoked again. Effects that are only invoked on the first render are extremely useful for initialization. If you return a function from the effect, the function will be invoked when the component is removed from the tree.
 
 <h3>memo</h3>
-The memo function can be used to create a component that will only render when its properties change. The second argument sent to the memo function is a predicate. A predicate is a function that only returns true or false. 
+The memo function can be used to create a component that will only render when its properties change. The second argument sent to the memo function is a predicate. A predicate is a function that only returns true or false. The predicate receives the previous properties and the next properties. React.memo is only for function components.
+
 
 <h3>useMemo</h3>
 <p>The useMemo Hook takes a result of a function and memoizes it. This means that it will not be recomputed every time. This Hook can be used for performance optimizations. In a memoized function, the result of a function call is saved and cached. Then when the function is called again with the same inputs, the cached value is returned.</p>
@@ -179,6 +180,13 @@ The Provider will only provide context values to it’s children. The useContext
 The Consumer is accessed within the useContext hook, which means that we no longer have to work directly with the consumer component.
 
 The context provider can place an object into context, but it can’t mutate the values in context on its own. It needs some help from a parent component. The trick is to create a stateful component that renders a context provider. When the state of the stateful component changes, it will rerender the context provider with new context data. Any of the context providers’ children will also be rerendered with the new context data. The stateful component that renders the context provider is our custom provider. That is: that’s the component that will be used when it’s time to wrap our App with the provider.
+
+<h3>useReducer</h3>
+An alternative to useState. Accepts a reducer of type (state, action) => newState, and returns the current state paired with a dispatch method. useReducer is usually preferable to useState when you have complex state logic that involves multiple sub-values or when the next state depends on the previous one. useReducer also lets you optimize performance for components that trigger deep updates because you can pass dispatch down instead of callbacks.
+
+```
+const [state, dispatch] = useReducer(reducer, initialArg, init);
+```
 
 <h2>React Testing</h2>
 
