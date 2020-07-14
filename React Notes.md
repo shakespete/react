@@ -2,6 +2,7 @@
 <ul>
   <li>React is declarative. In a declarative program, the syntax itself describes what should happen, and the details of how things happen are abstracted away.</li>
   <li>React can be rendered isomorphically, which means that it can be in platforms other than the browser. This means we can render our UI on the server before it ever gets to the browser.</li>
+  <li>Denormalized - means the same representation exists in multiple places</li>
 </ul>
 
 <h1>Redux and Hooks</h1>
