@@ -19,14 +19,21 @@ export interface IEpisode {
   url: string
 }
 
+export interface IAction {
+  type: string,
+  payload: any
+}
+
+export interface IEpisodesListProps {
+  episodes: Array<IEpisode>
+  toggleFav: (episode: IEpisode) => IAction
+  favourites: Array<IEpisode>
+}
+
 export interface IState {
   episodes: Array<IEpisode>,
   favourites: Array<IEpisode>
 }
 
-export interface IAction {
-  type: string,
-  payload: any
-}
 
 export type Dispatch  = React.Dispatch<IAction>;
