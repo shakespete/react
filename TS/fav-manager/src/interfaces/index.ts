@@ -2,5 +2,14 @@
  * ALL app Interfaces
  */
 
- export type Dispatch  = React.Dispatch<any>;
+export interface IState {
+  episodes: [],
+  favourites: []
+}
 
+export interface IAction {
+  type: string,
+  payload: any
+}
+
+export type Dispatch  = React.Dispatch<IAction>;
