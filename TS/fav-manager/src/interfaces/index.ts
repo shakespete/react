@@ -21,19 +21,20 @@ export interface IEpisode {
 
 export interface IAction {
   type: string,
-  payload: any
+  payload: Array<IEpisode> | any
+}
+
+export interface IState {
+  episodes: Array<IEpisode>
+  favourites: Array<IEpisode>
 }
 
 export interface IEpisodesListProps {
   episodes: Array<IEpisode>
-  toggleFav: (episode: IEpisode) => IAction
+  toggleFav: (episode: IEpisode, state: IState, dispatch: Dispatch) => IAction
+  state: IState
+  dispatch: Dispatch
   favourites: Array<IEpisode>
 }
-
-export interface IState {
-  episodes: Array<IEpisode>,
-  favourites: Array<IEpisode>
-}
-
 
 export type Dispatch  = React.Dispatch<IAction>;
