@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { MapProps } from '../interfaces';
+import { IMapProps } from '../interfaces';
+import { useMap } from '../context/MapProvider';
 
-export default function Map({ layout, width, height}: MapProps): JSX.Element {
-  // const mapLayout = layout.map((row: string) => row.split(''));
-  const rows = layout.length;
-  const cols = layout[0]?.length;
+export default function Map({ width, height}: IMapProps): JSX.Element {
+  const { state } = useMap();
+  const layout = state.mapSite;
+  const rows = state.totalRows;
+  const cols = state.totalCols;
+
   const len = 30;
   const pad = 35;
-
-  console.log(layout);
-  console.log(rows, cols);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

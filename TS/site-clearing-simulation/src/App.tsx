@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Map from './components/Map';
-import { MapLayout } from './interfaces';
+import CommandForm from './components/CommandForm';
+import { useMap } from './context/MapProvider';
 
-export default function App() {
-  const [map, setMap] = useState<MapLayout | []>([]);
+export default function App(): JSX.Element {
+  const { state, dispatch } = useMap();
 
   let fileReader: any;
   const processLayout = () => {
@@ -11,33 +12,38 @@ export default function App() {
     const mapString = content.split('\n');
     const mapLayout = mapString.map((row: string) => row.split(''));
 
-    if (mapString?.length) setMap(mapLayout);
+    if (mapString?.length) {
+      dispatch({
+        type: 'GENERATE_MAP',
+        payload: mapLayout
+      });
+    }
   }
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.persist();
-    if (event.currentTarget.files?.length) {
-      const file = event.currentTarget.files[0];
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.persist();
+    if (e.currentTarget.files?.length) {
+      const file = e.currentTarget.files[0];
       fileReader = new FileReader();
       fileReader.onloadend = processLayout;
       fileReader.readAsText(file)
     }
   };
 
-  console.log(map);
-
   return (
     <div>
-      <label>
-        Click Me
-        <input
-          type='file'
-          name='siteMap'
-          accept='text/plain'
-          onChange={onChange}
-        ></input>
-      </label>
-      {map.length ? (<Map layout={map} width={800} height={600} />) : ('')}
+      <input
+        type='file'
+        name='siteMap'
+        accept='text/plain'
+        onChange={onChange}
+      ></input>
+      {state.mapSite.length ? (
+        <>
+          <CommandForm />
+          <Map width={800} height={500} />
+        </>
+      ) : ('')}
     </div>
   )
 }
