@@ -13,7 +13,8 @@ const initialState = {
   totalRows: 0,
   totalCols: 0,
   currRow: 0,
-  currCol: -1
+  currCol: -1,
+  simInProgress: true
 };
 
 const MapContext = createContext<IState | any>(initialState);
@@ -25,17 +26,27 @@ function reducer(state: IState, action: IAction): IState {
       const layout = action.payload;
       const rows = layout.length;
       const cols = layout[0]?.length;
+      
+      const visitedMatrix = Array(rows);
+      for (let i = 0; i < rows; ++i) {
+        visitedMatrix[i] = Array(cols).fill(0);
+      }
 
       return {
         ...state,
         mapSite: action.payload,
+        visited: visitedMatrix,
         totalRows: rows,
         totalCols: cols
       }
     case 'MOVE_FORWARD': {
+
       return {
         ...state,
-        commList: [...state.commList, action.payload]
+        currRow: action.payload.row,
+        currCol: action.payload.col,
+        commList: [...state.commList, action.payload.command],
+        visited: action.payload.visited
       }
     }
     case 'CHANGE_DIR': {
@@ -43,6 +54,12 @@ function reducer(state: IState, action: IAction): IState {
         ...state,
         commList: [...state.commList, action.payload.command],
         currentDirection: action.payload.direction
+      }
+    }
+    case 'END_SIMULATION': {
+      return {
+        ...state,
+        simInProgress: false
       }
     }
     default:

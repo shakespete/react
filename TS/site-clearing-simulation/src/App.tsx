@@ -38,7 +38,7 @@ export default function App(): JSX.Element {
         accept='text/plain'
         onChange={onChange}
       ></input>
-      {state.mapSite.length ? (
+      {state.mapSite.length && state.simInProgress ? (
         <>
           <CommandForm />
           <Map width={800} height={500} />

@@ -3,6 +3,7 @@
  */
 
 export type MapLayout = Array<Array<string>>;
+export type VisLayout = Array<Array<number>>;
 
 export interface IAction {
   type: string
@@ -12,7 +13,7 @@ export interface IAction {
 export interface IState {
   currentDirection: string
   mapSite: MapLayout
-  visited: Array<Array<number>>
+  visited: VisLayout
   commList: Array<string>
   commCount: number
   fuelUsage: number
@@ -21,6 +22,7 @@ export interface IState {
   totalCols: number
   currRow: number
   currCol: number
+  simInProgress: boolean
 }
 
 export interface IMapProps {
