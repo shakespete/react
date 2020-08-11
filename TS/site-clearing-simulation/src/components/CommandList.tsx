@@ -17,7 +17,8 @@ const useStyles = makeStyles({
   thead: {
     backgroundColor: '#424242',
     textAlign: 'center',
-    color: '#fff'
+    color: '#fff',
+    fontWeight: 'bold'
   },
   tbody: {
     backgroundColor: '#fff',

@@ -15,7 +15,7 @@ export default function App(): JSX.Element {
     <div className="appParent">
       <Header />
       <div className="canvasParent">
-        <Map width={800} height={400} />
+        <Map width={785} height={400} />
         {state.message.length > 0 ? (
           <Message message={state.message} dispatch={dispatch} />
         ) : (

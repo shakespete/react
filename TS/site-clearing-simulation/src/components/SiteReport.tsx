@@ -19,8 +19,9 @@ const useStyles = makeStyles({
     borderColor: 'grey',
   },
   thead: {
-    textAlign: 'center',
-    color: '#fff'
+    textAlign: 'left',
+    color: '#fff',
+    fontWeight: 'bold'
   },
   tbody: {
     backgroundColor: '#fff',
@@ -28,7 +29,8 @@ const useStyles = makeStyles({
   },
   theadcost: {
     textAlign: 'right',
-    color: '#fff'
+    color: '#fff',
+    fontWeight: 'bold'
   },
   tcost: {
     textAlign: 'right'

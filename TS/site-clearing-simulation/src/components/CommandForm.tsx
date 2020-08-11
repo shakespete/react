@@ -17,7 +17,7 @@ export default function CommandForm(): JSX.Element {
     if (commArray[0].length) {
       const comm = commArray[0];
 
-      if (comm === 'a') {
+      if (comm === 'a' && commArray[1]) {
         if (state.currRow === 0 && state.currCol === -1 && (state.currentDirection !== 'E')) {
           setCommand('');
           return dispatch(endSimulation('Invalid Command: Exceeds Site Bounds'));
@@ -38,6 +38,7 @@ export default function CommandForm(): JSX.Element {
   return (
     <form onSubmit={submit}>
       <input type="text" className="commField" onChange={onChangeHandler} value={command} />
+      <span className="currDir">Current Direction: <strong>{state.currentDirection}</strong></span>
     </form>
   );
 }
