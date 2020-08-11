@@ -1,5 +1,14 @@
 import React, { useRef } from 'react';
 import { useMap } from '../context/MapProvider';
+import { endSimulation } from '../actions';
+
+const validateInput = (inputArr: Array<string>): boolean => { 
+  const arr = inputArr.map((a: string) => a.length);
+  const unequalStringLen = arr.every((val, i, arr) => val === arr[0]);
+  const invalidLettersCheck = inputArr.map((a: string) =>  a.match(/^[o,r,t,T]+$/g));
+  const invalidLetter = invalidLettersCheck.every((val) => val !== null);
+  return unequalStringLen && invalidLetter;
+}
 
 export default function FileInput(): JSX.Element {
   const { dispatch } = useMap();
@@ -8,10 +17,13 @@ export default function FileInput(): JSX.Element {
   const processLayout = () => {
     const content = fileReader.result;
     const mapString = content.split('\n');
-    const mapLayout = mapString.map((row: string) => row.split(''));
 
+    const validInput = validateInput(mapString);
+    if (!validInput) return dispatch(endSimulation('Invalid Input Data'));
+
+    const mapLayout = mapString.map((row: string) => row.split(''));
     if (mapString?.length) {
-      dispatch({
+      return dispatch({
         type: 'GENERATE_MAP',
         payload: mapLayout
       });
