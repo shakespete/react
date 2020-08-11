@@ -3,6 +3,7 @@ import Map from './components/Map';
 import { useMap } from './context/MapProvider';
 import CommandForm from './components/CommandForm';
 import SiteReport from './components/SiteReport';
+import CommandList from './components/CommandList';
 
 export default function App(): JSX.Element {
   const { state, dispatch } = useMap();
@@ -50,6 +51,7 @@ export default function App(): JSX.Element {
         </div>
       )}
       <SiteReport />
+      <CommandList />
     </div>
   )
 }

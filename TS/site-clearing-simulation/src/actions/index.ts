@@ -4,6 +4,21 @@ import { IState, IAction } from '../interfaces';
  * Action Creators
  */
 
+const checkBoundError = (dir: string, currPos: number, bound: number, steps: number): boolean => {
+  switch (dir) {
+    case 'E':
+      return currPos + steps >= bound;
+    case 'W':
+      return currPos - steps < 0;
+    case 'N':
+      return currPos - steps < 0;
+    case 'S':
+      return currPos + steps >= bound;
+    default:
+      return true;
+  }
+}
+
 export const advance = (store: IState, steps: number): IAction => {
   let siteVis = JSON.parse(JSON.stringify(store.visited));
   let siteMap = store.mapSite;
@@ -17,6 +32,14 @@ export const advance = (store: IState, steps: number): IAction => {
   let paintDmg = 0;
 
   if (dir === 'E' || dir === 'W') {
+    const boundaryError = checkBoundError(dir, cCol, store.totalCols, steps);
+    if (boundaryError) {
+      return {
+        type: 'END_SIMULATION',
+        payload: 'Command Exceeds Site Bounds'
+      }
+    }
+
     while (steps) {
       dir === 'E' ? cCol++ : cCol--;
 
@@ -51,6 +74,14 @@ export const advance = (store: IState, steps: number): IAction => {
       steps--;
     }
   } else {
+    const boundaryError = checkBoundError(dir, cRow, store.totalRows, steps);
+    if (boundaryError) {
+      return {
+        type: 'END_SIMULATION',
+        payload: 'Command Exceeds Site Bounds'
+      }
+    }
+
     while (steps) {
       dir === 'N' ? cRow-- : cRow++;
 

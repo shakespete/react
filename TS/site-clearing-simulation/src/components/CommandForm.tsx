@@ -20,7 +20,7 @@ export default function CommandForm(): JSX.Element {
       if (comm === 'a') {
         if (state.currRow === 0 && state.currCol === -1 && (state.currentDirection !== 'E')) {
           setCommand('');
-          dispatch(endSimulation('Bulldozer Out of Bounds'));
+          return dispatch(endSimulation('Command Exceeds Site Bounds'));
         }
         let steps: number = parseInt(commArray[1]);
         setCommand('');
