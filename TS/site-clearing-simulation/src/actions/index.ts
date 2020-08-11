@@ -45,7 +45,6 @@ export const advance = (store: IState, steps: number): IAction => {
 
       const landType = siteMap[cRow][cCol];
       const landVis = siteVis[cRow][cCol];
-      console.log(landType);
       switch (landType) {
         case 'o':
           fuelCost += 1;
@@ -87,7 +86,6 @@ export const advance = (store: IState, steps: number): IAction => {
 
       const landType = siteMap[cRow][cCol];
       const landVis = siteVis[cRow][cCol];
-      console.log(landType);
       switch (landType) {
         case 'o':
           fuelCost += 1;

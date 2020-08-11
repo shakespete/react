@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { ICommandRowProps } from '../interfaces';
 
 const useStyles = makeStyles({
   container: {
@@ -27,6 +28,17 @@ const useStyles = makeStyles({
   }
 });
 
+const CommandRow = ({ index, command }: ICommandRowProps): JSX.Element => {
+  const comm = command.split(' ');
+  const turn = comm[0] === 'l' ? 'Turn Left' : 'Turn Right';
+
+  return (
+    <TableCell>
+      {index + 1}: {comm[0] === 'a' ? `Advance ${comm[1]}` : turn }
+    </TableCell>
+  );
+}
+
 export default function CommandList(): JSX.Element {
   const { state } = useMap();
   const classes = useStyles();
@@ -43,9 +55,7 @@ export default function CommandList(): JSX.Element {
         <TableBody className={classes.tbody}>
           {state.commList.map((comm: string, idx: number) => (
             <TableRow key={idx}>
-              <TableCell>
-                {idx + 1}: {comm}
-              </TableCell>
+              <CommandRow index={idx} command={comm} />
             </TableRow>
           ))}
         </TableBody>

@@ -38,3 +38,8 @@ export interface IMapProps {
   width: number
   height: number
 }
+
+export interface ICommandRowProps {
+  index: number
+  command: string
+}
