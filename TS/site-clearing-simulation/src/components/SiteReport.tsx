@@ -53,7 +53,8 @@ export default function SiteReport(): JSX.Element {
   const fuelUseCost = state.fuelUsage;
   const unclearedCost = state.unclearedSquares * 3;
   const paintCost = state.paintDmg * 2;
-  const totalCost = commOHCost + fuelUseCost + unclearedCost + paintCost;
+  const protTreeCost = state.protectedTree * 10;
+  const totalCost = commOHCost + fuelUseCost + unclearedCost + protTreeCost + paintCost;
 
   return (
     <TableContainer component={Paper} className={classes.container}>
@@ -83,8 +84,8 @@ export default function SiteReport(): JSX.Element {
           </TableRow>
           <TableRow>
             <TableCell>Destruction of Protected Tree</TableCell>
-            <TableCell className={classes.tcost}>0</TableCell>
-            <TableCell className={classes.tcost}>0</TableCell>
+            <TableCell className={classes.tcost}>{state.protectedTree}</TableCell>
+            <TableCell className={classes.tcost}>{protTreeCost}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Paint Damage to Bulldozer</TableCell>

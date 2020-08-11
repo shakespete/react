@@ -117,12 +117,12 @@ canvas {
   font-size: 18px;
 }
 
-.currDir{
+.currDir {
   color: #fff;
   margin-left: 20px;
 }
 
-.reportContainer{
+.reportContainer {
   margin-top: 20px;
   padding: 0px 15%;
   display: flex;

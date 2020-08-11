@@ -30,6 +30,7 @@ export const advance = (store: IState, steps: number): IAction => {
   let cCol = store.currCol;
   let fuelCost = 0;
   let paintDmg = 0;
+  let protectedTree = 0;
 
   if (dir === 'E' || dir === 'W') {
     const boundaryError = checkBoundError(dir, cCol, store.totalCols, steps);
@@ -42,7 +43,6 @@ export const advance = (store: IState, steps: number): IAction => {
 
     while (steps) {
       dir === 'E' ? cCol++ : cCol--;
-
       const landType = siteMap[cRow][cCol];
       const landVis = siteVis[cRow][cCol];
       switch (landType) {
@@ -61,10 +61,10 @@ export const advance = (store: IState, steps: number): IAction => {
           }
           break;
         case 'T':
-          return {
-            type: 'END_SIMULATION',
-            payload: 'Destruction of Protected Tree'
-          };
+          protectedTree += 1;
+          fuelCost += 2;
+          if (steps > 1) paintDmg += 1;
+          break;
         default:
           break;
       }
@@ -83,7 +83,6 @@ export const advance = (store: IState, steps: number): IAction => {
 
     while (steps) {
       dir === 'N' ? cRow-- : cRow++;
-
       const landType = siteMap[cRow][cCol];
       const landVis = siteVis[cRow][cCol];
       switch (landType) {
@@ -102,10 +101,10 @@ export const advance = (store: IState, steps: number): IAction => {
           }
           break;
         case 'T':
-          return {
-            type: 'END_SIMULATION',
-            payload: 'Destruction of Protected Tree'
-          };
+          protectedTree += 1;
+          fuelCost += 2;
+          if (steps > 1) paintDmg += 1;
+          break;
         default:
           break;
       }
@@ -123,7 +122,8 @@ export const advance = (store: IState, steps: number): IAction => {
       command: `a ${totalSteps}`,
       visited: siteVis,
       fuel: fuelCost,
-      paint: paintDmg
+      paint: paintDmg,
+      protected: protectedTree
     }
   };
 }

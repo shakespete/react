@@ -10,6 +10,7 @@ const initialState: IState = {
   commCount: 0,
   fuelUsage: 0,
   paintDmg: 0,
+  protectedTree: 0,
   totalRows: 0,
   totalCols: 0,
   unclearedSquares: 0,
@@ -43,6 +44,9 @@ function reducer(state: IState, action: IAction): IState {
         simInProgress: true
       }
     case 'ADVANCE': {
+      let message = '';
+      if (action.payload.protected) message = 'Destruction of Protected Tree';
+
       return {
         ...state,
         currRow: action.payload.row,
@@ -50,7 +54,9 @@ function reducer(state: IState, action: IAction): IState {
         commList: [...state.commList, action.payload.command],
         visited: action.payload.visited,
         fuelUsage: state.fuelUsage + action.payload.fuel,
-        paintDmg: state.paintDmg + action.payload.paint
+        paintDmg: state.paintDmg + action.payload.paint,
+        protectedTree: action.payload.protected,
+        message: message
       }
     }
     case 'CHANGE_DIR': {

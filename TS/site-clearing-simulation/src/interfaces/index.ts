@@ -25,6 +25,7 @@ export interface IState {
   commCount: number
   fuelUsage: number
   paintDmg: number
+  protectedTree: number
   totalRows: number
   totalCols: number
   unclearedSquares: number
