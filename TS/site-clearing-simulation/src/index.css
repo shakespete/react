@@ -110,6 +110,7 @@ canvas {
 }
 
 .reportContainer{
+  margin-top: 20px;
   padding: 0px 15%;
   display: flex;
   justify-content: space-around;
@@ -117,14 +118,6 @@ canvas {
 
 .siteReport {
   width: 500px;
-}
-
-.commList {
-  width: 150px;
-}
-
-.commList td {
-  padding-left: 0px;
 }
 
 .appMessage {
