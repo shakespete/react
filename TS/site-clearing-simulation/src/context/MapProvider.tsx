@@ -12,9 +12,11 @@ const initialState = {
   paintDmg: 0,
   totalRows: 0,
   totalCols: 0,
+  unclearedSquares: 0,
   currRow: 0,
   currCol: -1,
-  simInProgress: true
+  simInProgress: true,
+  message: ''
 };
 
 const MapContext = createContext<IState | any>(initialState);
@@ -45,7 +47,9 @@ function reducer(state: IState, action: IAction): IState {
         currRow: action.payload.row,
         currCol: action.payload.col,
         commList: [...state.commList, action.payload.command],
-        visited: action.payload.visited
+        visited: action.payload.visited,
+        fuelUsage: state.fuelUsage + action.payload.fuel,
+        paintDmg: state.paintDmg + action.payload.paint
       }
     }
     case 'CHANGE_DIR': {
@@ -56,9 +60,23 @@ function reducer(state: IState, action: IAction): IState {
       }
     }
     case 'END_SIMULATION': {
+      let uncleared = 0;
+      for (let i = 0; i < state.totalRows; ++i) {
+        for (let j = 0; j < state.totalCols; ++j) {
+          if (
+            state.visited[i][j] === 0 &&
+            state.mapSite[i][j] !== 'T'
+          ) {
+            uncleared++;
+          }
+        }
+      }
+
       return {
         ...state,
-        simInProgress: false
+        simInProgress: false,
+        message: action.payload,
+        unclearedSquares: uncleared
       }
     }
     default:

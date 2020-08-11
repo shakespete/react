@@ -35,7 +35,7 @@ export default function CommandForm(): JSX.Element {
     }
   };
 
-  console.log(state);
+  // console.log(state);
 
   return (
     <form onSubmit={submit}>

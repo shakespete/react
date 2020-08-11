@@ -21,9 +21,11 @@ export interface IState {
   paintDmg: number
   totalRows: number
   totalCols: number
+  unclearedSquares: number
   currRow: number
   currCol: number
   simInProgress: boolean
+  message: string
 }
 
 export interface IMapProps {

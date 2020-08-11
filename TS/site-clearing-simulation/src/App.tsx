@@ -1,7 +1,8 @@
 import React from 'react';
 import Map from './components/Map';
-import CommandForm from './components/CommandForm';
 import { useMap } from './context/MapProvider';
+import CommandForm from './components/CommandForm';
+import SiteReport from './components/SiteReport';
 
 export default function App(): JSX.Element {
   const { state, dispatch } = useMap();
@@ -43,7 +44,12 @@ export default function App(): JSX.Element {
           <CommandForm />
           <Map width={800} height={400} />
         </>
-      ) : ('')}
+      ) : (
+        <div>
+          {state.message}
+        </div>
+      )}
+      <SiteReport />
     </div>
   )
 }
