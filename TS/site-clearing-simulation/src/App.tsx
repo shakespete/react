@@ -41,7 +41,7 @@ export default function App(): JSX.Element {
       {state.mapSite.length && state.simInProgress ? (
         <>
           <CommandForm />
-          <Map width={800} height={500} />
+          <Map width={800} height={400} />
         </>
       ) : ('')}
     </div>

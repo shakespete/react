@@ -4,6 +4,7 @@
 
 export type MapLayout = Array<Array<string>>;
 export type VisLayout = Array<Array<number>>;
+export type CommList = Array<string>;
 
 export interface IAction {
   type: string
@@ -14,7 +15,7 @@ export interface IState {
   currentDirection: string
   mapSite: MapLayout
   visited: VisLayout
-  commList: Array<string>
+  commList: CommList
   commCount: number
   fuelUsage: number
   paintDmg: number

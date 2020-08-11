@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMap } from '../context/MapProvider';
+import { advance, changeDir, endSimulation } from '../actions';
 
 export default function CommandForm(): JSX.Element {
   const [command, setCommand] = useState('');
@@ -19,77 +20,17 @@ export default function CommandForm(): JSX.Element {
       if (comm === 'a') {
         if (state.currRow === 0 && state.currCol === -1 && (state.currentDirection !== 'E')) {
           setCommand('');
-          return dispatch({
-            type: 'END_SIMULATION',
-            payload: 'Simulation Ended'
-          });
+          dispatch(endSimulation('Bulldozer Out of Bounds'));
         }
-
-        let siteVis = JSON.parse(JSON.stringify(state.visited));
         let steps: number = parseInt(commArray[1]);
-
-        const dir = state.currentDirection;
-        let cRow = state.currRow;
-        let cCol = state.currCol;
-
-        if (dir === 'E' || dir === 'W') {
-          while (steps) {
-            dir === 'E' ? cCol++ : cCol--;
-            siteVis[cRow][cCol] = 1;
-            steps--;
-          }
-        } else {
-          while (steps) {
-            dir === 'N' ? cRow-- : cRow++;
-            siteVis[cRow][cCol] = 1;
-            steps--;
-          }
-        }
-
         setCommand('');
-        return dispatch({
-          type: 'MOVE_FORWARD',
-          payload: {
-            row: cRow,
-            col: cCol,
-            command: `${comm} ${commArray[1]}`,
-            visited: siteVis
-          }
-        });
+        dispatch(advance(state, steps));
       } else if (comm === 'q') {
         setCommand('');
-        return dispatch({
-          type: 'END_SIMULATION',
-          payload: 'Simulation Ended'
-        });
+        dispatch(endSimulation('Simulation Ended'));
       } else {
-        let dirObj = {
-          command: comm,
-          direction: ''
-        };
-
-        switch (state.currentDirection) {
-          case 'N':
-            dirObj.direction = comm === 'l' ? 'W' : 'E';
-            break;
-          case 'S':
-            dirObj.direction = comm === 'l' ? 'E' : 'W';
-            break;
-          case 'E':
-            dirObj.direction = comm === 'l' ? 'N' : 'S';
-            break;
-          case 'W':
-            dirObj.direction = comm === 'l' ? 'S' : 'N';
-            break;
-          default:
-            break;
-        }
-        
         setCommand('');
-        return dispatch({
-          type: 'CHANGE_DIR',
-          payload: dirObj
-        });
+        dispatch(changeDir(state, comm));
       }
     }
   };

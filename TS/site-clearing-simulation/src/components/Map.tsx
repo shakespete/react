@@ -21,9 +21,25 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
       if (ctx) {
         for (let i = 0; i < rows; ++i) {
           for (let j = 0; j < cols; ++j) {
-            ctx.strokeStyle = "green";
-            ctx.strokeRect(j * pad + 10, i * pad + 10, len, len);
+            switch (layout[i][j]) {
+              case "o":
+                ctx.strokeStyle = "#51B6F5";
+                break;
+              case "r":
+                ctx.strokeStyle = "#F5AF4E";
+                break;
+              case "t":
+                ctx.strokeStyle = "#A5F55B";
+                break;
+              case "T":
+                ctx.strokeStyle = "#E036F5";
+                break;
+              default:
+                break;
+            }
+            
             ctx.font = '16px serif';
+            ctx.strokeRect(j * pad + 10, i * pad + 10, len, len);
             ctx.fillText(layout[i][j], j * pad + 21, i * pad + 30);
           }
         }
@@ -31,5 +47,5 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
     }       
   },[layout, rows, cols]);
 
-  return <canvas ref={canvasRef} width={width} height={height} />;
+  return <canvas ref={canvasRef} className="canvasRect" width={width} height={height} />;
 }

@@ -39,8 +39,7 @@ function reducer(state: IState, action: IAction): IState {
         totalRows: rows,
         totalCols: cols
       }
-    case 'MOVE_FORWARD': {
-
+    case 'ADVANCE': {
       return {
         ...state,
         currRow: action.payload.row,
