@@ -4,13 +4,13 @@ import { useMap } from '../context/MapProvider';
 export default function CommandList(): JSX.Element {
   const { state } = useMap();
   return (
-    <table>
+    <table className="commList">
       <thead>
-        <tr><th>Commands Executed</th></tr>
+        <tr><th>Issued Commands</th></tr>
       </thead>
       <tbody>
         {state.commList.map((comm: string, idx: number) => {
-          return <tr key={idx}><td>{comm}</td></tr>
+          return <tr key={idx}><td>{idx + 1}: {comm}</td></tr>
         })}
       </tbody>
     </table>

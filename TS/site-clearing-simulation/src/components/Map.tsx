@@ -23,16 +23,16 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
           for (let j = 0; j < cols; ++j) {
             switch (layout[i][j]) {
               case "o":
-                ctx.strokeStyle = "#51B6F5";
+                ctx.strokeStyle = "#0FAAF5";
                 break;
               case "r":
-                ctx.strokeStyle = "#F5AF4E";
+                ctx.strokeStyle = "#F58C0C";
                 break;
               case "t":
-                ctx.strokeStyle = "#A5F55B";
+                ctx.strokeStyle = "#95F518";
                 break;
               case "T":
-                ctx.strokeStyle = "#E036F5";
+                ctx.strokeStyle = "#CE0CF5";
                 break;
               default:
                 break;

@@ -1,4 +1,6 @@
-body {
+html, body {
+  min-height: 100%;
+  padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -12,8 +14,98 @@ code {
     monospace;
 }
 
+.appParent {
+  background-color: #f1efed;
+  width: 100%;
+  padding: 60px 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.header {
+  padding: 5px 30px;
+  margin-top: -60px;
+  height: 50px;
+  background-color: #393632;
+}
+
+.logo {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='25' viewBox='0 0 32 25'%3E%3Cg fill='%23C74634'%3E%3Cpath d='M9.9,20.1c-5.5,0-9.9-4.4-9.9-9.9c0-5.5,4.4-9.9,9.9-9.9h11.6c5.5,0,9.9,4.4,9.9,9.9c0,5.5-4.4,9.9-9.9,9.9H9.9 M21.2,16.6c3.6,0,6.4-2.9,6.4-6.4c0-3.6-2.9-6.4-6.4-6.4h-11c-3.6,0-6.4,2.9-6.4,6.4s2.9,6.4,6.4,6.4H21.2'/%3E%3C/g%3E%3C/svg%3E");
+  width: 44px;
+  height: 44px;
+  text-indent: -9999px;
+  transform: translate(-4px, 2px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 36px;
+}
+
+.canvasParent {
+  background-color: #e0ddda;
+  padding: 30px 0px 0px 0px;
+}
+
+canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  background-color: #fff;
+}
+
 .canvasRect {
-  border: 2px solid #F55741;
+  border: 2px solid #01678c;
+}
+
+.appInputContainer {
+  margin-top: 30px;
+  height: 40px;
+  background-color: #312d2a;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  text-align: center;
+  margin-top: 0;
+  height: 40px;
+  width: 200px;
+  border-radius: 4px;
+  border: none;
+  background-color: #759c6c;
+  color: #ffffff;
+  text-shadow: none;
+  line-height: 40px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.commField {
+  height: 30px;
+  font-size: 18px;
+}
+
+.reportContainer{
+  padding: 0px 15%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.siteReport {
+  width: 500px;
+}
+
+.commList {
+  width: 150px;
+}
+
+.commList td {
+  padding-left: 0px;
 }
 
 /* 

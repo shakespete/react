@@ -14,7 +14,7 @@ export default function CommandForm(): JSX.Element {
     e.preventDefault();
     
     const commArray = command.split(' ');
-    if (commArray.length) {
+    if (commArray[0].length) {
       const comm = commArray[0];
 
       if (comm === 'a') {
@@ -35,11 +35,9 @@ export default function CommandForm(): JSX.Element {
     }
   };
 
-  // console.log(state);
-
   return (
     <form onSubmit={submit}>
-      <input type="text" onChange={onChangeHandler} value={command} />
+      <input type="text" className="commField" onChange={onChangeHandler} value={command} />
     </form>
   );
 }

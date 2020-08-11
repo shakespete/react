@@ -15,7 +15,7 @@ const initialState = {
   unclearedSquares: 0,
   currRow: 0,
   currCol: -1,
-  simInProgress: true,
+  simInProgress: false,
   message: ''
 };
 
@@ -39,7 +39,8 @@ function reducer(state: IState, action: IAction): IState {
         mapSite: action.payload,
         visited: visitedMatrix,
         totalRows: rows,
-        totalCols: cols
+        totalCols: cols,
+        simInProgress: true
       }
     case 'ADVANCE': {
       return {
