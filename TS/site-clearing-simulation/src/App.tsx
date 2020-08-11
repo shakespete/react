@@ -6,25 +6,28 @@ import CommandForm from './components/CommandForm';
 import FileInput from './components/FileInput';
 import SiteReport from './components/SiteReport';
 import CommandList from './components/CommandList';
+import Message from './components/Message';
 
 export default function App(): JSX.Element {
-  const { state } = useMap();
+  const { state, dispatch } = useMap();
 
   return (
     <div className="appParent">
       <Header />
       <div className="canvasParent">
         <Map width={800} height={400} />
-        <div className="appInputContainer">
-          {state.simInProgress ? (
-            <CommandForm />
-          ) : (
-            <FileInput />
-          )}
-        </div>
+        {state.message.length > 0 ? (
+          <Message message={state.message} dispatch={dispatch} />
+        ) : (
+          <div className="appInputContainer">
+            {state.simInProgress ? (
+              <CommandForm />
+            ) : (
+              <FileInput />
+            )}
+          </div>
+        )}
       </div>
-      
-      {state.message}
       <div className="reportContainer">
         <SiteReport />
         <CommandList />

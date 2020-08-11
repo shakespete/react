@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { IState, IAction } from '../interfaces';
 
-const initialState = {
+const initialState: IState = {
   currentDirection: 'E',
   mapSite: [],
   visited: [],
@@ -79,6 +79,9 @@ function reducer(state: IState, action: IAction): IState {
         message: action.payload,
         unclearedSquares: uncleared
       }
+    }
+    case 'RESET_SIM': {
+      return initialState;
     }
     default:
       return state;

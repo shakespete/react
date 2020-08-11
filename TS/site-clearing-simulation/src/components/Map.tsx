@@ -10,14 +10,14 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
 
   const len = 30;
   const pad = 35;
-
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (canvasRef.current && rows && cols) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    ctx?.clearRect(0, 0, width, height);
 
+    if (canvas && rows && cols) {
       if (ctx) {
         for (let i = 0; i < rows; ++i) {
           for (let j = 0; j < cols; ++j) {
@@ -44,8 +44,7 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
           }
         }
       } 
-    }       
-  },[layout, rows, cols]);
-
+    }
+  },[layout, rows, cols, width, height]);
   return <canvas ref={canvasRef} className="canvasRect" width={width} height={height} />;
 }

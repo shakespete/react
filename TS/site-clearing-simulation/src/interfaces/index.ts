@@ -5,10 +5,16 @@
 export type MapLayout = Array<Array<string>>;
 export type VisLayout = Array<Array<number>>;
 export type CommList = Array<string>;
+export type Dispatch  = React.Dispatch<IAction>;
 
 export interface IAction {
   type: string
   payload: any
+}
+
+export interface IMessageProps {
+  message: string
+  dispatch: Dispatch
 }
 
 export interface IState {
