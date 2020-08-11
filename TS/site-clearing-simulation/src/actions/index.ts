@@ -36,7 +36,7 @@ export const advance = (store: IState, steps: number): IAction => {
     if (boundaryError) {
       return {
         type: 'END_SIMULATION',
-        payload: 'Command Exceeds Site Bounds'
+        payload: 'Invalid Command: Exceeds Site Bounds'
       }
     }
 
@@ -78,7 +78,7 @@ export const advance = (store: IState, steps: number): IAction => {
     if (boundaryError) {
       return {
         type: 'END_SIMULATION',
-        payload: 'Command Exceeds Site Bounds'
+        payload: 'Invalid Command: Exceeds Site Bounds'
       }
     }
 

@@ -20,18 +20,18 @@ export default function CommandForm(): JSX.Element {
       if (comm === 'a') {
         if (state.currRow === 0 && state.currCol === -1 && (state.currentDirection !== 'E')) {
           setCommand('');
-          return dispatch(endSimulation('Command Exceeds Site Bounds'));
+          return dispatch(endSimulation('Invalid Command: Exceeds Site Bounds'));
         }
         let steps: number = parseInt(commArray[1]);
         setCommand('');
         dispatch(advance(state, steps));
-      } else if (comm === 'q') {
-        setCommand('');
-        dispatch(endSimulation('Simulation Ended'));
-      } else {
+      } else if (comm === 'l' || comm === 'r') {
         setCommand('');
         dispatch(changeDir(state, comm));
-      }
+      } else if (comm === 'q') {
+        setCommand('');
+        dispatch(endSimulation('Simulation Ended by User'));
+      } 
     }
   };
 
