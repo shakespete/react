@@ -24,12 +24,17 @@ export default function VirtualControls(): JSX.Element {
   };
 
   return (
-    <div className="virtualBtContainer">
+    <div data-testid="virtual-control" className="virtualBtContainer">
       <div className="ctrlRow">
-        <button className="virtualBt" onClick={advanceHandler}>
+        <button
+          className="virtualBt"
+          onClick={advanceHandler}
+          data-testid="adv-btn"
+        >
           A
         </button>
         <input
+          data-testid="steps-input"
           type="number"
           className="ctrlInput"
           value={blocks}
@@ -37,15 +42,23 @@ export default function VirtualControls(): JSX.Element {
         />
       </div>
       <div className="ctrlRow">
-        <button className="virtualBt" onClick={() => turnHandler("l")}>
+        <button
+          data-testid="left-btn"
+          className="virtualBt"
+          onClick={() => turnHandler("l")}
+        >
           L
         </button>
-        <button className="virtualBt" onClick={() => turnHandler("r")}>
+        <button
+          data-testid="right-btn"
+          className="virtualBt"
+          onClick={() => turnHandler("r")}
+        >
           R
         </button>
       </div>
       <div>
-        <button className="quitBt" onClick={quitHandler}>
+        <button data-testid="quit-btn" className="quitBt" onClick={quitHandler}>
           QUIT
         </button>
       </div>

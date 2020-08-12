@@ -53,6 +53,7 @@ export default function FileInput(): JSX.Element {
         File Input
       </div>
       <input
+        data-testid="text-file-input"
         type="file"
         name="siteMap"
         accept="text/plain"

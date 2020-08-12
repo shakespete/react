@@ -76,7 +76,9 @@ export default function SiteReport(): JSX.Element {
           </TableRow>
           <TableRow>
             <TableCell>Fuel Usage</TableCell>
-            <TableCell className={classes.tcost}>{fuelUseCost}</TableCell>
+            <TableCell className={classes.tcost} data-testid="fuel-cost">
+              {fuelUseCost}
+            </TableCell>
             <TableCell className={classes.tcost}>{fuelUseCost}</TableCell>
           </TableRow>
           <TableRow>
@@ -101,7 +103,9 @@ export default function SiteReport(): JSX.Element {
           <TableRow>
             <TableCell className={classes.totalHead}>Total</TableCell>
             <TableCell></TableCell>
-            <TableCell className={classes.total}>{totalCost}</TableCell>
+            <TableCell className={classes.total} data-testid="total-cost">
+              {totalCost}
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>

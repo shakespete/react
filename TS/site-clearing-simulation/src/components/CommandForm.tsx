@@ -48,6 +48,7 @@ export default function CommandForm(): JSX.Element {
   return (
     <form onSubmit={submit}>
       <input
+        data-testid="command-input"
         type="text"
         className="commField"
         onChange={onChangeHandler}
