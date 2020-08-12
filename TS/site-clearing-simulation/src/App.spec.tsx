@@ -120,7 +120,7 @@ test("Upload valid text file", async () => {
   expect(getByTestId("virtual-control")).toBeInTheDocument();
 });
 
-test("Navigate site using virtual control", async () => {
+test("Send commands using virtual controls", async () => {
   const { getByTestId, getByText } = render(
     <MapProvider>
       <App />
@@ -206,4 +206,100 @@ test("Navigate site using virtual control", async () => {
   );
   const total = getByTestId("total-cost");
   expect(total.textContent).toEqual("131");
+});
+
+test("Send commands through input field", async () => {
+  const { getByTestId, getByText } = render(
+    <MapProvider>
+      <App />
+    </MapProvider>
+  );
+  const file = new File(
+    ["ootooooooo\noooooooToo\nrrrooooToo\nrrrroooooo\nrrrrrtoooo"],
+    "input.txt",
+    { type: "text/plain" }
+  );
+  const fileInput = getByTestId("text-file-input");
+  fireEvent.change(fileInput, { target: { files: [file] } });
+  await wait(() => getByText("Current Direction:"));
+  const inputEl = getByTestId("command-input");
+  fireEvent.change(inputEl, { target: { value: "a 4" } });
+  fireEvent.submit(inputEl);
+  expect(getByText("Advance 4")).toBeInTheDocument();
+  fireEvent.change(inputEl, { target: { value: "RIGHT" } });
+  fireEvent.submit(inputEl);
+  expect(getByText("Turn Right")).toBeInTheDocument();
+  fireEvent.change(inputEl, { target: { value: "a 4" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "Left" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "Advance 2" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "a 4" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "l" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "a 1" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "l" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "a 1" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "q" } });
+  fireEvent.submit(inputEl);
+  const total = getByTestId("total-cost");
+  expect(total.textContent).toEqual("129");
+  expect(getByText("Simulation Ended by User")).toBeInTheDocument();
+});
+
+test("Boundary exceeds error", async () => {
+  const { getByTestId, getByText } = render(
+    <MapProvider>
+      <App />
+    </MapProvider>
+  );
+  const file = new File(
+    ["ootooooooo\noooooooToo\nrrrooooToo\nrrrroooooo\nrrrrrtoooo"],
+    "input.txt",
+    { type: "text/plain" }
+  );
+  const fileInput = getByTestId("text-file-input");
+  fireEvent.change(fileInput, { target: { files: [file] } });
+  await wait(() => getByText("Current Direction:"));
+  const inputEl = getByTestId("command-input");
+  fireEvent.change(inputEl, { target: { value: "l" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "a 4" } });
+  fireEvent.submit(inputEl);
+  expect(getByText("Invalid Command: Exceeds Site Bounds")).toBeInTheDocument();
+});
+
+test("Destruction of protected tree error", async () => {
+  const { getByTestId, getByText } = render(
+    <MapProvider>
+      <App />
+    </MapProvider>
+  );
+  const file = new File(
+    ["ootooooooo\noooooooToo\nrrrooooToo\nrrrroooooo\nrrrrrtoooo"],
+    "input.txt",
+    { type: "text/plain" }
+  );
+  const fileInput = getByTestId("text-file-input");
+  fireEvent.change(fileInput, { target: { files: [file] } });
+  await wait(() => getByText("Current Direction:"));
+  const inputEl = getByTestId("command-input");
+  const total = getByTestId("destruction-cost");
+  expect(total.textContent).toEqual("0");
+  fireEvent.change(inputEl, { target: { value: "a 4" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "RIGHT" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "a 1" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "l" } });
+  fireEvent.submit(inputEl);
+  fireEvent.change(inputEl, { target: { value: "advance 6" } });
+  fireEvent.submit(inputEl);
+  expect(total.textContent).toEqual("1");
 });

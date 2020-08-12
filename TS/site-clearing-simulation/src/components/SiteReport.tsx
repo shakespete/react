@@ -90,7 +90,7 @@ export default function SiteReport(): JSX.Element {
           </TableRow>
           <TableRow>
             <TableCell>Destruction of Protected Tree</TableCell>
-            <TableCell className={classes.tcost}>
+            <TableCell className={classes.tcost} data-testid="destruction-cost">
               {state.protectedTree}
             </TableCell>
             <TableCell className={classes.tcost}>{protTreeCost}</TableCell>
