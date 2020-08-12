@@ -54,7 +54,7 @@ function reducer(state: IState, action: IAction): IState {
         fuelUsage: state.fuelUsage + action.payload.fuel,
         paintDmg: state.paintDmg + action.payload.paint,
         protectedTree: action.payload.protected,
-        message: message,
+        message,
       };
     }
     case "CHANGE_DIR": {

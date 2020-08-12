@@ -32,3 +32,21 @@ test("Renders Site Report table", () => {
   const commandsTableElement = getByText("Communication Overhead");
   expect(commandsTableElement).toBeInTheDocument();
 });
+
+test("Command input is not visible", () => {
+  const { queryByText } = render(
+    <MapProvider>
+      <App />
+    </MapProvider>
+  );
+  expect(queryByText("Current Direction:")).toBeNull();
+});
+
+test("Virtual control is not visible", () => {
+  const { queryByText } = render(
+    <MapProvider>
+      <App />
+    </MapProvider>
+  );
+  expect(queryByText("QUIT")).toBeNull();
+});

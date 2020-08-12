@@ -34,7 +34,8 @@ const CommandRow = ({ index, command }: ICommandRowProps): JSX.Element => {
 
   return (
     <TableCell>
-      {index + 1}: {comm[0] === "a" ? `Advance ${comm[1]}` : turn}
+      <strong>{index + 1}:</strong>&nbsp;
+      {comm[0] === "a" ? `Advance ${comm[1]}` : turn}
     </TableCell>
   );
 };

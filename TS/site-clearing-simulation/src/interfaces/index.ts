@@ -2,10 +2,18 @@
  * Interface List
  */
 
-export type MapLayout = Array<Array<string>>;
-export type VisLayout = Array<Array<number>>;
-export type CommList = Array<string>;
+export type MapLayout = IMapRow[];
+export type VisLayout = IVisRow[];
+export type CommList = string[];
 export type Dispatch = React.Dispatch<IAction>;
+
+export type IMapRow = string[];
+export type IVisRow = number[];
+
+export interface IContext {
+  state: IState;
+  dispatch: Dispatch;
+}
 
 export interface IAction {
   type: string;
