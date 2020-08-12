@@ -1,43 +1,43 @@
-import React from 'react';
-import { useMap } from '../context/MapProvider';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { ICommandRowProps } from '../interfaces';
+import React from "react";
+import { useMap } from "../context/MapProvider";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import { ICommandRowProps } from "../interfaces";
 
 const useStyles = makeStyles({
   container: {
-    height: '235px',
-    width: '250px'
+    height: "235px",
+    width: "250px",
   },
   thead: {
-    backgroundColor: '#424242',
-    textAlign: 'center',
-    color: '#fff',
-    fontWeight: 'bold'
+    backgroundColor: "#424242",
+    textAlign: "center",
+    color: "#fff",
+    fontWeight: "bold",
   },
   tbody: {
-    backgroundColor: '#fff',
-    color: '#424242',
-    overflowY: 'auto'
-  }
+    backgroundColor: "#fff",
+    color: "#424242",
+    overflowY: "auto",
+  },
 });
 
 const CommandRow = ({ index, command }: ICommandRowProps): JSX.Element => {
-  const comm = command.split(' ');
-  const turn = comm[0] === 'l' ? 'Turn Left' : 'Turn Right';
+  const comm = command.split(" ");
+  const turn = comm[0] === "l" ? "Turn Left" : "Turn Right";
 
   return (
     <TableCell>
-      {index + 1}: {comm[0] === 'a' ? `Advance ${comm[1]}` : turn }
+      {index + 1}: {comm[0] === "a" ? `Advance ${comm[1]}` : turn}
     </TableCell>
   );
-}
+};
 
 export default function CommandList(): JSX.Element {
   const { state } = useMap();
@@ -46,8 +46,8 @@ export default function CommandList(): JSX.Element {
   return (
     <Paper>
       <TableContainer className={classes.container}>
-        <Table stickyHeader size="small" >
-          <TableHead >
+        <Table stickyHeader size="small">
+          <TableHead>
             <TableRow>
               <TableCell className={classes.thead}>Issued Commands</TableCell>
             </TableRow>
@@ -62,5 +62,5 @@ export default function CommandList(): JSX.Element {
         </Table>
       </TableContainer>
     </Paper>
-  )
+  );
 }

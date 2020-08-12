@@ -1,9 +1,9 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
-import { MapProvider } from './context/MapProvider';
+import React from "react";
+import { render } from "@testing-library/react";
+import App from "./App";
+import { MapProvider } from "./context/MapProvider";
 
-test('Renders File Input button', () => {
+test("Renders File Input button", () => {
   const { getByText } = render(
     <MapProvider>
       <App />
@@ -13,7 +13,7 @@ test('Renders File Input button', () => {
   expect(fileInputElement).toBeInTheDocument();
 });
 
-test('Renders Command List table', () => {
+test("Renders Command List table", () => {
   const { getByText } = render(
     <MapProvider>
       <App />
@@ -23,7 +23,7 @@ test('Renders Command List table', () => {
   expect(commandsTableElement).toBeInTheDocument();
 });
 
-test('Renders Site Report table', () => {
+test("Renders Site Report table", () => {
   const { getByText } = render(
     <MapProvider>
       <App />

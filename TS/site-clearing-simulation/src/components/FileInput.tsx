@@ -1,14 +1,16 @@
-import React, { useRef } from 'react';
-import { useMap } from '../context/MapProvider';
-import { endSimulation } from '../actions';
+import React, { useRef } from "react";
+import { useMap } from "../context/MapProvider";
+import { endSimulation } from "../actions";
 
-const validateInput = (inputArr: Array<string>): boolean => { 
+const validateInput = (inputArr: string[]): boolean => {
   const arr = inputArr.map((a: string) => a.length);
-  const unequalStringLen = arr.every((val, i, arr) => val === arr[0]);
-  const invalidLettersCheck = inputArr.map((a: string) =>  a.match(/^[o,r,t,T]+$/g));
+  const unequalStringLen = arr.every((val, i, len) => val === len[0]);
+  const invalidLettersCheck = inputArr.map((a: string) =>
+    a.match(/^[o,r,t,T]+$/g)
+  );
   const invalidLetter = invalidLettersCheck.every((val) => val !== null);
   return unequalStringLen && invalidLetter;
-}
+};
 
 export default function FileInput(): JSX.Element {
   const { dispatch } = useMap();
@@ -16,19 +18,19 @@ export default function FileInput(): JSX.Element {
   let fileReader: any;
   const processLayout = () => {
     const content = fileReader.result;
-    const mapString = content.split('\n');
+    const mapString = content.split("\n");
 
     const validInput = validateInput(mapString);
-    if (!validInput) return dispatch(endSimulation('Invalid Input Data'));
+    if (!validInput) return dispatch(endSimulation("Invalid Input Data"));
 
-    const mapLayout = mapString.map((row: string) => row.split(''));
+    const mapLayout = mapString.map((row: string) => row.split(""));
     if (mapString?.length) {
       return dispatch({
-        type: 'GENERATE_MAP',
-        payload: mapLayout
+        type: "GENERATE_MAP",
+        payload: mapLayout,
       });
     }
-  }
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
@@ -36,14 +38,14 @@ export default function FileInput(): JSX.Element {
       const file = e.currentTarget.files[0];
       fileReader = new FileReader();
       fileReader.onloadend = processLayout;
-      fileReader.readAsText(file)
+      fileReader.readAsText(file);
     }
   };
 
   const fileInput = useRef<HTMLInputElement>(null);
-  const triggerFileInput = (e: React.MouseEvent<HTMLInputElement>) => {
+  const triggerFileInput = () => {
     fileInput?.current?.click();
-  }
+  };
 
   return (
     <>
@@ -51,13 +53,13 @@ export default function FileInput(): JSX.Element {
         File Input
       </div>
       <input
-        type='file'
-        name='siteMap'
-        accept='text/plain'
+        type="file"
+        name="siteMap"
+        accept="text/plain"
         ref={fileInput}
         onChange={onChange}
         hidden
       ></input>
     </>
-  )
+  );
 }

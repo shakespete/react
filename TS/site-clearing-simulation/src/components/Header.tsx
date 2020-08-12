@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function Header(): JSX.Element {
   return (
@@ -6,5 +6,5 @@ export default function Header(): JSX.Element {
       <div className="logo"></div>
       <div className="headerTitle">Aconex</div>
     </div>
-  )
+  );
 }

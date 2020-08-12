@@ -1,27 +1,32 @@
-import { IState, IAction } from '../interfaces';
+import { IState, IAction } from "../interfaces";
 
 /**
  * Action Creators
  */
 
-const checkBoundError = (dir: string, currPos: number, bound: number, steps: number): boolean => {
+const checkBoundError = (
+  dir: string,
+  currPos: number,
+  bound: number,
+  steps: number
+): boolean => {
   switch (dir) {
-    case 'E':
+    case "E":
       return currPos + steps >= bound;
-    case 'W':
+    case "W":
       return currPos - steps < 0;
-    case 'N':
+    case "N":
       return currPos - steps < 0;
-    case 'S':
+    case "S":
       return currPos + steps >= bound;
     default:
       return true;
   }
-}
+};
 
 export const advance = (store: IState, steps: number): IAction => {
-  let siteVis = JSON.parse(JSON.stringify(store.visited));
-  let siteMap = store.mapSite;
+  const siteVis = JSON.parse(JSON.stringify(store.visited));
+  const siteMap = store.mapSite;
 
   const dir = store.currentDirection;
   const totalSteps = steps;
@@ -32,27 +37,27 @@ export const advance = (store: IState, steps: number): IAction => {
   let paintDmg = 0;
   let protectedTree = 0;
 
-  if (dir === 'E' || dir === 'W') {
+  if (dir === "E" || dir === "W") {
     const boundaryError = checkBoundError(dir, cCol, store.totalCols, steps);
     if (boundaryError) {
       return {
-        type: 'END_SIMULATION',
-        payload: 'Invalid Command: Exceeds Site Bounds'
-      }
+        type: "END_SIMULATION",
+        payload: "Invalid Command: Exceeds Site Bounds",
+      };
     }
 
     while (steps) {
-      dir === 'E' ? cCol++ : cCol--;
+      dir === "E" ? cCol++ : cCol--;
       const landType = siteMap[cRow][cCol];
       const landVis = siteVis[cRow][cCol];
       switch (landType) {
-        case 'o':
+        case "o":
           fuelCost += 1;
           break;
-        case 'r':
-          landVis === 1 ? fuelCost += 1 : fuelCost += 2;
+        case "r":
+          landVis === 1 ? (fuelCost += 1) : (fuelCost += 2);
           break;
-        case 't':
+        case "t":
           if (landVis === 1) {
             fuelCost += 1;
           } else {
@@ -60,7 +65,7 @@ export const advance = (store: IState, steps: number): IAction => {
             if (steps > 1) paintDmg += 1;
           }
           break;
-        case 'T':
+        case "T":
           protectedTree += 1;
           fuelCost += 2;
           if (steps > 1) paintDmg += 1;
@@ -76,23 +81,23 @@ export const advance = (store: IState, steps: number): IAction => {
     const boundaryError = checkBoundError(dir, cRow, store.totalRows, steps);
     if (boundaryError) {
       return {
-        type: 'END_SIMULATION',
-        payload: 'Invalid Command: Exceeds Site Bounds'
-      }
+        type: "END_SIMULATION",
+        payload: "Invalid Command: Exceeds Site Bounds",
+      };
     }
 
     while (steps) {
-      dir === 'N' ? cRow-- : cRow++;
+      dir === "N" ? cRow-- : cRow++;
       const landType = siteMap[cRow][cCol];
       const landVis = siteVis[cRow][cCol];
       switch (landType) {
-        case 'o':
+        case "o":
           fuelCost += 1;
           break;
-        case 'r':
-          landVis === 1 ? fuelCost += 1 : fuelCost += 2;
+        case "r":
+          landVis === 1 ? (fuelCost += 1) : (fuelCost += 2);
           break;
-        case 't':
+        case "t":
           if (landVis === 1) {
             fuelCost += 1;
           } else {
@@ -100,7 +105,7 @@ export const advance = (store: IState, steps: number): IAction => {
             if (steps > 1) paintDmg += 1;
           }
           break;
-        case 'T':
+        case "T":
           protectedTree += 1;
           fuelCost += 2;
           if (steps > 1) paintDmg += 1;
@@ -115,7 +120,7 @@ export const advance = (store: IState, steps: number): IAction => {
   }
 
   return {
-    type: 'ADVANCE',
+    type: "ADVANCE",
     payload: {
       row: cRow,
       col: cCol,
@@ -123,43 +128,43 @@ export const advance = (store: IState, steps: number): IAction => {
       visited: siteVis,
       fuel: fuelCost,
       paint: paintDmg,
-      protected: protectedTree
-    }
+      protected: protectedTree,
+    },
   };
-}
+};
 
 export const changeDir = (store: IState, comm: string): IAction => {
-  let dirObj = {
+  const dirObj = {
     command: comm,
-    direction: ''
+    direction: "",
   };
 
   switch (store.currentDirection) {
-    case 'N':
-      dirObj.direction = comm === 'l' ? 'W' : 'E';
+    case "N":
+      dirObj.direction = comm === "l" ? "W" : "E";
       break;
-    case 'S':
-      dirObj.direction = comm === 'l' ? 'E' : 'W';
+    case "S":
+      dirObj.direction = comm === "l" ? "E" : "W";
       break;
-    case 'E':
-      dirObj.direction = comm === 'l' ? 'N' : 'S';
+    case "E":
+      dirObj.direction = comm === "l" ? "N" : "S";
       break;
-    case 'W':
-      dirObj.direction = comm === 'l' ? 'S' : 'N';
+    case "W":
+      dirObj.direction = comm === "l" ? "S" : "N";
       break;
     default:
       break;
   }
-  
+
   return {
-    type: 'CHANGE_DIR',
-    payload: dirObj
+    type: "CHANGE_DIR",
+    payload: dirObj,
   };
-}
+};
 
 export const endSimulation = (message: string): IAction => {
   return {
-    type: 'END_SIMULATION',
-    payload: message
+    type: "END_SIMULATION",
+    payload: message,
   };
-}
+};

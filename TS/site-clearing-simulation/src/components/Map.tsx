@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import { IMapProps } from '../interfaces';
-import { useMap } from '../context/MapProvider';
-import VirtualControls from '../components/VirtualControls';
+import React, { useEffect, useRef } from "react";
+import { IMapProps } from "../interfaces";
+import { useMap } from "../context/MapProvider";
+import VirtualControls from "../components/VirtualControls";
 
-export default function Map({ width, height}: IMapProps): JSX.Element {
+export default function Map({ width, height }: IMapProps): JSX.Element {
   const { state } = useMap();
   const layout = state.mapSite;
   const passed = state.visited;
@@ -16,7 +16,7 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
+    const ctx = canvas?.getContext("2d");
     ctx?.clearRect(0, 0, width, height);
 
     if (canvas && rows && cols) {
@@ -39,24 +39,28 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
               default:
                 break;
             }
-            
-            ctx.font = '16px serif';
+            ctx.font = "16px serif";
             if (passed[i][j] === 1) {
-              ctx.fillStyle = '#60bf49a8';
+              ctx.fillStyle = "#60bf49a8";
               ctx.fillRect(j * pad + 10, i * pad + 10, len, len);
             }
             ctx.strokeRect(j * pad + 10, i * pad + 10, len, len);
-            ctx.fillStyle = '#312d2a';
+            ctx.fillStyle = "#312d2a";
             ctx.fillText(layout[i][j], j * pad + 21, i * pad + 30);
           }
         }
-      } 
+      }
     }
-  },[layout, passed, rows, cols, width, height]);
+  }, [layout, passed, rows, cols, width, height]);
   return (
     <div className="mapContainer">
-      <canvas ref={canvasRef} className="canvasRect" width={width} height={height} />
-      { state.simInProgress && <VirtualControls /> }
+      <canvas
+        ref={canvasRef}
+        className="canvasRect"
+        width={width}
+        height={height}
+      />
+      {state.simInProgress && <VirtualControls />}
     </div>
   );
 }
