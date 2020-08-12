@@ -46,7 +46,7 @@ export default function FileInput(): JSX.Element {
   }
 
   return (
-    <div >
+    <>
       <div className="btn" onClick={triggerFileInput}>
         File Input
       </div>
@@ -58,6 +58,6 @@ export default function FileInput(): JSX.Element {
         onChange={onChange}
         hidden
       ></input>
-    </div>
+    </>
   )
 }

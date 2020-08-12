@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { IMapProps } from '../interfaces';
 import { useMap } from '../context/MapProvider';
+import VirtualControls from '../components/VirtualControls';
 
 export default function Map({ width, height}: IMapProps): JSX.Element {
   const { state } = useMap();
@@ -52,5 +53,10 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
       } 
     }
   },[layout, passed, rows, cols, width, height]);
-  return <canvas ref={canvasRef} className="canvasRect" width={width} height={height} />;
+  return (
+    <div className="mapContainer">
+      <canvas ref={canvasRef} className="canvasRect" width={width} height={height} />
+      <VirtualControls />
+    </div>
+  );
 }

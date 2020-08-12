@@ -12,7 +12,8 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles({
   container: {
     height: '235px',
-    width: '550px'
+    width: '550px',
+    marginRight: '20px'
   },
   table: {
     backgroundColor: '#424242',

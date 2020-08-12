@@ -56,6 +56,10 @@ code {
   padding: 30px 0px 0px 0px;
 }
 
+.mapContainer {
+  position: relative;
+}
+
 canvas {
   padding-left: 0;
   padding-right: 0;
@@ -68,6 +72,51 @@ canvas {
 
 .canvasRect {
   border: 2px solid #01678c;
+}
+
+.virtualBtContainer {
+  position: absolute;
+  bottom: 0px;
+  right: 150px;
+}
+
+.virtualBt {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  background-color: #424242;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  margin: 3px;
+}
+
+.quitBt {
+  width: 106px;
+  height: 50px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff;
+  background-color: #424242;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  margin: 3px;
+}
+
+.ctrlRow {
+  display: flex;
+}
+
+.ctrlInput {
+  width: 42px;
+  font-size: 20px;
+  text-align: center;
+  margin: 3px;
 }
 
 .appInputContainer {
@@ -124,13 +173,9 @@ canvas {
 
 .reportContainer {
   margin-top: 20px;
-  padding: 0px 15%;
+  padding: 0px;
   display: flex;
-  justify-content: space-around;
-}
-
-.siteReport {
-  width: 500px;
+  justify-content: center;
 }
 
 .appMessage {

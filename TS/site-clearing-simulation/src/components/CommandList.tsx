@@ -45,22 +45,22 @@ export default function CommandList(): JSX.Element {
 
   return (
     <Paper>
-    <TableContainer className={classes.container}>
-      <Table stickyHeader size="small" >
-        <TableHead >
-          <TableRow>
-            <TableCell className={classes.thead}>Issued Commands</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody className={classes.tbody}>
-          {state.commList.map((comm: string, idx: number) => (
-            <TableRow key={idx}>
-              <CommandRow index={idx} command={comm} />
+      <TableContainer className={classes.container}>
+        <Table stickyHeader size="small" >
+          <TableHead >
+            <TableRow>
+              <TableCell className={classes.thead}>Issued Commands</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody className={classes.tbody}>
+            {state.commList.map((comm: string, idx: number) => (
+              <TableRow key={idx}>
+                <CommandRow index={idx} command={comm} />
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Paper>
   )
 }
