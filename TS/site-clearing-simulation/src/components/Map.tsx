@@ -56,7 +56,7 @@ export default function Map({ width, height}: IMapProps): JSX.Element {
   return (
     <div className="mapContainer">
       <canvas ref={canvasRef} className="canvasRect" width={width} height={height} />
-      <VirtualControls />
+      { state.simInProgress && <VirtualControls /> }
     </div>
   );
 }

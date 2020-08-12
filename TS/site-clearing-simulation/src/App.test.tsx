@@ -22,3 +22,13 @@ test('Renders Command List table', () => {
   const commandsTableElement = getByText("Issued Commands");
   expect(commandsTableElement).toBeInTheDocument();
 });
+
+test('Renders Site Report table', () => {
+  const { getByText } = render(
+    <MapProvider>
+      <App />
+    </MapProvider>
+  );
+  const commandsTableElement = getByText("Communication Overhead");
+  expect(commandsTableElement).toBeInTheDocument();
+});
