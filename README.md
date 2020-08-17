@@ -207,6 +207,7 @@ Code coverage is the process of reporting on how many lines of code have actuall
 To run Jest with code coverage, simply add the coverage flag when you run the jest command:
 
 <b>npm test -- --coverage</b>
+<b>npm test -- --coverage --watchAll=false</b> <i>*Generates coverage report</i>
 
 <h3>ReactDOM</h3>
 <ul>
