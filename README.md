@@ -128,7 +128,7 @@ Do not use this Hook unless it is really needed, which is only in certain edge c
 3) Browser Paint: the time when the component’s elements are actually added to the DOM
 4) useEffect is called
 
-useLayoutEffect is invoked after the render, but before the browser paints the change. In most circumstances, useEffect is the write tool for the job, but if your effect is essential to the browser paint, you may want to use useLayoutEffect. For instance, you may want to obtain the with and height of an element when the window is resized. The width and height of the window is information that your component may need before the browser paints. useLayoutEffect is used to calculate the window’s width and height before the paint.
+useLayoutEffect is invoked after the render, but before the browser paints the change. In most circumstances, useEffect is the right tool for the job, but if your effect is essential to the browser paint, you may want to use useLayoutEffect. For instance, you may want to obtain the with and height of an element when the window is resized. The width and height of the window is information that your component may need before the browser paints. useLayoutEffect is used to calculate the window’s width and height before the paint.
 
 ```
 function useWindowSize {
@@ -221,9 +221,10 @@ If we want the component to render, a function that is part of React Testing Lib
 Code coverage is the process of reporting on how many lines of code have actually been tested. It provides a metric that can help you decide when you have written enough tests.
 
 To run Jest with code coverage, simply add the coverage flag when you run the jest command:
-
-<b>npm test -- --coverage</b>
-<b>npm test -- --coverage --watchAll=false</b> <i>*Generates coverage report</i>
+<ul>
+  <li>npm test -- --coverage</li>
+  <li>npm test -- --coverage --watchAll=false <i>*Generates coverage report</i></li>
+</ul>
 
 <h3>ReactDOM</h3>
 <ul>
