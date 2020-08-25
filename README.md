@@ -189,6 +189,22 @@ An alternative to useState. Accepts a reducer of type (state, action) => newStat
 const [state, dispatch] = useReducer(reducer, initialArg, init);
 ```
 
+<h3>Summary</h3>
+<ul>
+  <li>useMemo is to memoize a calculation result between a function's calls and between renders</li>
+  <li>useCallback is to memoize a callback itself (referential equality) between renders</li>
+  <li>useRef is to keep data between renders (updating does not fire re-rendering)</li>
+  <li>useState is to keep data between renders (updating will fire re-rendering)</li>
+</ul>
+
+useMemo focuses on avoiding heavy calculation.
+
+useCallback focuses on a different thing: it fixes performance issues when inline event handlers like onClick={() => { doSomething(...); } cause PureComponent child re-rendering (because function expressions there are referentially different each time)
+
+This said, useCallback is closer to useRef, rather than a way to memoize a calculation result.
+
+https://stackoverflow.com/questions/54963248/whats-the-difference-between-usecallback-and-usememo-in-practice/54963730
+
 <h2>React Testing</h2>
 
 <h3>Testing React Components</h3>
