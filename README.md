@@ -287,6 +287,15 @@ A Pure Component is a function component that does not contain state and will re
 
 ![alt text](https://raw.githubusercontent.com/donavon/hook-flow/master/hook-flow.png)
 
+<h1>What does render mean?</h1>
+<p>In a nutshell, rendering is the process of transforming your react components into DOM (Document Object Model) nodes that your browser can understand and display on the screen.</p>
+
+<p>DOM manipulation is extremely slow. In contrast, manipulating React elements is much, much faster. React makes the most of this by creating a virtual representation of what the DOM should look like called the Virtual DOM[1].</p>
+
+<p>Whenever you make any changes to your running React application, such as entering text, removing an element, adding an element, etc, React will batch all of these changes together in its Virtual DOM, then compare this representation with the actual DOM, find what needs to be updated, and then make the smallest possible changes to the real DOM to keep them in sync while keeping the application performant.</p>
+
+<p>Lastly, it’s worth noting that React separates itself into 2 libraries: the main React library and the ReactDOM library. The React library handles all of the element creation and manipulation while the ReactDOM library is solely in charge of rendering those elements to the browser. This separation of concerns allows React to not only target the browser, but any other platform as well.</p>
+
 <h1>Fiber</h1>
 When a change occurs, React makes a copy of the component tree as a JavaScript object. It looks for the parts of the tree that need to change and changes only those parts. Once complete, the copy of the tree (known as the work-in-progress tree) replaces the existing tree. It’s important to reiterate that it uses the parts of the tree that are already there.
 
