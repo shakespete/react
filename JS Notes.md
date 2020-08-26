@@ -2,7 +2,6 @@
 
 <ul>
   <li>JavaScript always passes by value. However, with objects (Object, Array, Function), the value is a reference to the object.</li>
-  <li>Javascript is a single threaded programming language, which means it has a single call stack and can do one thing at a time.</li>
   <li>In JavaScript, function arguments are references to the actual data.</li>
   <li>In JavaScript, arrays, objects, and functions are the same only when they are the exact same instance.</li>
   <li>Isomorphic applications are applications that can be rendered on multiple platforms. Universal code means that the exact same code can run in multiple environments.</li>
@@ -223,3 +222,11 @@ Wherever webpack finds an import statement, it will find the associated module i
 
 <h3>Saving Data Locally</h3>
 We can save data locally to the browser using the Web Storage API. Data can be saved by either using the window.localStorage or window.sessionStorage objects. The sessionStorage API only saves data for the user’s session. Closing the tabs or restarting the browser will clear any data saved to sessionStorage. On the other hand, localStorage will save data indefinitely until you remove it. Loading data from web storage, saving data to web storage, stringifying data, and parsing JSON strings… all of these tasks are synchronous.
+
+<h3>The Event Loop</h3>
+
+Javascript is a single threaded programming language, which means it has a single call stack and can do one thing at a time.
+
+JavaScript concurrency model is different from other languages like C and Java, and it is based on an “event loop.” In this model, we run an operation and give it a callback function that is going to be executed later when the first operation is completed. This way, the call stack is not blocked and other operations can be added to it.
+
+The event loop has one simple job: it looks at the call stack and the task queue, and if the stack is empty, it takes the first item in the queue and sends it back to the call stack.
