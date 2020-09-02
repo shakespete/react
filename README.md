@@ -8,6 +8,13 @@
 <h3>state and props?</h3>
 props (short for “properties”) and state are both plain JavaScript objects. While both hold information that influences the output of render, they are different in one important way: props get passed to the component (similar to function parameters) whereas state is managed within the component (similar to variables declared within a function).
 
+<h3>Higher-Order Component (HOC)</h3>
+<p>
+A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React’s compositional nature. Concretely, a higher-order component is a function that takes a component and returns a new component.
+</p>
+<p>
+Whereas a component transforms props into UI, a higher-order component transforms a component into another component. HOCs are common in third-party React libraries, such as Redux’s connect.
+</p>
 <h1>Redux and Hooks</h1>
 <ul>
   <li>Redux itself just deals with JavaScript objects, so it provides the store, deals with actions and action creators, and handles reducers.</li>
