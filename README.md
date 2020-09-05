@@ -66,9 +66,9 @@ selectorFn is a function that works similarly to the mapStateToProps function. I
 Any time you use a function callback for useState, that function is only going to be called when the component is initially rendered for the rest of the lifetime of that component.
 
 <h3>useEffect</h3>
-The useEffect Hook accepts a function that contains code with side effects. The function passed to the Hook will run after the render is done and the component is on the screen.
+<p>The useEffect Hook accepts a function that contains code with side effects. The function passed to the Hook will run after the render is done and the component is on the screen.</p>
 
-A cleanup function can be returned from the Hook, which will be called when the component unmounts and is used to, for example, clean up timers or subscriptions. The cleanup function will also be called before the effect is triggered again, when dependencies of the effect update. Also note that useEffect callbacks are only called if they have no dependencies listed or if they have a dependency listed and one of those dependencies changed.
+<p>A cleanup function can be returned from the Hook, which will be called when the component unmounts and is used to, for example, clean up timers or subscriptions. The cleanup function will also be called before the effect is triggered again, when dependencies of the effect update. Also note that useEffect callbacks are only called if they have no dependencies listed or if they have a dependency listed and one of those dependencies changed.</p>
 
 To avoid triggering the effect on every re-render, we can specify an array of values as the second argument to the Hook. Only when any of these values change, the effect will get triggered again.
 
@@ -127,9 +127,9 @@ Updating a ref value is considered a side effect. This is the reason why you wan
 
 
 <h3>useLayoutEffect</h3>
-The useLayoutEffect Hook is identical to the useEffect Hook, but it fires synchronously after all DOM mutations are completed and before the component is painted on the browser.
+<p>The useLayoutEffect Hook is identical to the useEffect Hook, but it fires synchronously after all DOM mutations are completed and before the component is painted on the browser.</p>
 
-Do not use this Hook unless it is really needed, which is only in certain edge cases. useLayoutEffect will block visual updates in the browser, and thus, is slower than useEffect.
+<p>Do not use this Hook unless it is really needed, which is only in certain edge cases. useLayoutEffect will block visual updates in the browser, and thus, is slower than useEffect.</p>
 
 <strong>The rule here is to use useEffect first. If your mutation changes the appearance of the DOM node, which can cause it to flicker, you should use useLayoutEffect instead.</strong>
 
@@ -182,9 +182,9 @@ function useMousePosition {
 ```
 
 <h3>useContext</h3>
-The useContext Hook accepts a context object and returns the current value for the context. When the context provider updates its value, the Hook will trigger a re-render with the latest value.
+<p>The useContext Hook accepts a context object and returns the current value for the context. When the context provider updates its value, the Hook will trigger a re-render with the latest value.</p>
 
-Using createContext we created a new instance of React context that we named ColorContext. The color context contains two components: the ColorContext.Provider and the ColorContext.Consumer. We need to use the provider to place the colors in state. We add data to context by setting the value property of the Provider.
+<p>Using createContext we created a new instance of React context that we named ColorContext. The color context contains two components: the ColorContext.Provider and the ColorContext.Consumer. We need to use the provider to place the colors in state. We add data to context by setting the value property of the Provider.</p>
 
 The Provider will only provide context values to it’s children. The useContext hooks requires the context instance to obtain values from it. In other words the context object itself needs to be passed to the Hook, not the consumer or provider.
 
