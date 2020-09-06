@@ -236,10 +236,67 @@ The event loop has one simple job: it looks at the call stack and the task queue
 <h3>Event Delegation</h3>
 <p>Event delegation is a technique of delegating events to a single common ancestor. Due to event bubbling, events "bubble" up the DOM tree by executing any handlers progressively on each ancestor element up to the root that may be listening to it.</p>
 
-<p>DOM events provide useful information about the element that initiated the event via Event.target. This allows the parent element to handle behavior as though the target element was listening to the event, rather than all children of the parent or the parent itself.</p>
+<p>DOM events provide useful information about the element that initiated the event via Event.target. This allows the parent element to handle behavior as though the target element was listening to the event, rather than all children of the parent or the parent itself. The Message queue also contains the callbacks from the DOM events such as click events and keyboard events.</p>
+
+<p>In case of DOM events, the event listener sits in the web APIs environment waiting for a certain event (click event in this case) to happen, and when that event happens, then the callback function is placed in the message queue waiting to be executed.</p>
 
 This provides two main benefits:
 <ul>
   <li>It increases performance and reduces memory consumption by only needing to register a single event listener to handle potentially thousands of elements.</li>
   <li>If elements are dynamically added to the parent, there is no need to register new event listeners for them.</li>
 </ul>
+
+<h3>ES6 Job Queue / Micro-Task queue</h3>
+<p>ES6 introduced the concept of job queue/micro-task queue which is used by Promises in JavaScript. The difference between the message queue and the job queue is that the job queue has a higher priority than the message queue, which means that promise jobs inside the job queue/ micro-task queue will be executed before the callbacks inside the message queue.</p>
+
+```
+console.log('Script start');
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+
+new Promise((resolve, reject) => {
+    resolve('Promise resolved');
+  }).then(res => console.log(res))
+    .catch(err => console.log(err));
+
+console.log('Script End');
+
+Script start
+Script End
+Promise resolved
+setTimeout
+```
+
+<p>While the event loop is executing the tasks in the micro-task queue and in that time if another promise is resolved, it will be added to the end of the same micro-task queue, and it will be executed before the callbacks inside the message queue no matter for how much time the callback is waiting to be executed.</p>
+
+```
+console.log('Script start');
+setTimeout(() => {
+  console.log('setTimeout');
+}, 0);
+
+new Promise((resolve, reject) => {
+    resolve('Promise 1 resolved');
+  }).then(res => console.log(res));
+
+new Promise((resolve, reject) => {
+  resolve('Promise 2 resolved');
+  }).then(res => {
+    console.log(res);
+    return new Promise((resolve, reject) => {
+      resolve('Promise 3 resolved');
+    })
+  }).then(res => console.log(res));
+
+console.log('Script End');
+
+Script start
+Script End
+Promise 1 resolved
+Promise 2 resolved
+Promise 3 resolved
+setTimeout
+```
+
+<p>So all the tasks in micro-task queue will be executed before the tasks in message queue. That is, the event loop will first empty the micro-task queue before executing any callback in the message queue.</p>
