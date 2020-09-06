@@ -231,6 +231,8 @@ JavaScript concurrency model is different from other languages like C and Java, 
 
 The event loop has one simple job: it looks at the call stack and the task queue, and if the stack is empty, it takes the first item in the queue and sends it back to the call stack.
 
+![alt text](https://github.com/shakespete/react/blob/dev/note_images/async.png)
+
 <h3>Event Delegation</h3>
 <p>Event delegation is a technique of delegating events to a single common ancestor. Due to event bubbling, events "bubble" up the DOM tree by executing any handlers progressively on each ancestor element up to the root that may be listening to it.</p>
 
