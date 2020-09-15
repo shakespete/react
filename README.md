@@ -50,7 +50,51 @@ Container components use a connector to connect Redux to a presentational compon
 <h2>Redux Hooks</h2>
 
 <h3>useDispatch</h3>
-The useDispatch Hook returns a reference to the dispatch function that is provided by the Redux store. It can be used to dispatch actions that are returned from action creators.
+<p>The useDispatch Hook returns a reference to the dispatch function that is provided by the Redux store. It can be used to dispatch actions that are returned from action creators.</p>
+
+```
+import React from 'react'
+import { useDispatch } from 'react-redux'
+
+export const CounterComponent = ({ value }) => {
+  const dispatch = useDispatch()
+
+  return (
+    <div>
+      <span>{value}</span>
+      <button onClick={() => dispatch({ type: 'increment-counter' })}>
+        Increment counter
+      </button>
+    </div>
+  )
+}
+```
+
+<p>Reminder: when passing a callback using dispatch to a child component, you should memoize it with useCallback, just like you should memoize any passed callback. This avoids unnecessary rendering of child components due to the changed callback reference. You can safely pass [dispatch] in the dependency array for the useCallback call - since dispatch won't change, the callback will be reused properly (as it should).</p>
+
+```
+import React, { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+
+export const CounterComponent = ({ value }) => {
+  const dispatch = useDispatch()
+  const incrementCounter = useCallback(
+    () => dispatch({ type: 'increment-counter' }),
+    [dispatch]
+  )
+
+  return (
+    <div>
+      <span>{value}</span>
+      <MyIncrementButton onIncrement={incrementCounter} />
+    </div>
+  )
+}
+
+export const MyIncrementButton = React.memo(({ onIncrement }) => (
+  <button onClick={onIncrement}>Increment counter</button>
+))
+```
 
 <h3>useSelector</h3>
 The Selector Hook. It allows us to get data from the Redux store state, by defining a selector function.
@@ -59,6 +103,27 @@ const result = useSelector(selectorFn, equalityFn)
 
 selectorFn is a function that works similarly to the mapStateToProps function. It will get the full state object as its only argument. The selector function gets executed whenever the component renders, and whenever an action is dispatched (and the state is different than the previous state).
 
+Basic usage:
+```
+import React from 'react'
+import { useSelector } from 'react-redux'
+
+export const CounterComponent = () => {
+  const counter = useSelector(state => state.counter)
+  return <div>{counter}</div>
+}
+```
+
+Using props via closure to determine what to extract:
+```
+import React from 'react'
+import { useSelector } from 'react-redux'
+
+export const TodoListItem = props => {
+  const todo = useSelector(state => state.todos[props.id])
+  return <div>{todo.text}</div>
+}
+```
 
 <h2>React Hooks</h2>
 
@@ -113,6 +178,63 @@ const memoizedCallback = useMemo(
   [a, b, c]
 )
 ```
+
+```
+function CandyDispenser() {
+  const initialCandies = ['snickers', 'skittles', 'twix', 'milky way']
+  const [candies, setCandies] = React.useState(initialCandies)
+  
+  // ----- Original code -----
+  const dispense = candy => {
+    setCandies(allCandies => allCandies.filter(c => c !== candy))
+  }
+  // ----- Original code -----
+  
+  // ----- useCallback -----
+  const dispense = React.useCallback(candy => {
+    setCandies(allCandies => allCandies.filter(c => c !== candy))
+  }, [])
+  // ----- useCallback -----
+  
+  // ----- useCallback refactored -----
+  const dispense = candy => {
+    setCandies(allCandies => allCandies.filter(c => c !== candy))
+  }
+  const dispenseCallback = React.useCallback(dispense, [])
+  // ----- useCallback refactored -----
+  
+  return (
+    <div>
+      <h1>Candy Dispenser</h1>
+      <div>
+        <div>Available Candy</div>
+        {candies.length === 0 ? (
+          <button onClick={() => setCandies(initialCandies)}>refill</button>
+        ) : (
+          <ul>
+            {candies.map(candy => (
+              <li key={candy}>
+                <button onClick={() => dispense(candy)}>grab</button> {candy}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  )
+}
+```
+
+<h3>So when should I useMemo and useCallback?</h3>
+<p>Performance optimizations are not free. They ALWAYS come with a cost but do NOT always come with a benefit to offset that cost.</p>
+
+There are specific reasons both of these hooks are built-into React:
+<ol>
+  <li>Referential equality</li>
+  <li>Computationally expensive calculations</li>
+</ol>
+
+https://kentcdodds.com/blog/usememo-and-usecallback
 
 <h3>useRef</h3>
 In React, a ref is an object that stores values for the lifetime of a component.
