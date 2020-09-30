@@ -1,12 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
+import { KeycloakProvider } from '@react-keycloak/web';
+import keycloak from './keycloak';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <KeycloakProvider
+      keycloak={keycloak}
+      onEvent={(event, error) => {
+        console.log('onKeycloakEvent', event, error);
+      }}
+      onTokens={(tokens) => {
+        console.log('onKeycloakTokens', tokens);
+      }}
+    >
+      <App />
+    </KeycloakProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
