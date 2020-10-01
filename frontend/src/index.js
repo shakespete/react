@@ -1,28 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { KeycloakProvider } from '@react-keycloak/web';
-import keycloak from './keycloak';
-
-import App from './App';
+import AppRouter from './routes';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
+const Root = () => (
   <React.StrictMode>
-    <KeycloakProvider
-      keycloak={keycloak}
-      onEvent={(event, error) => {
-        console.log('onKeycloakEvent', event, error);
-      }}
-      onTokens={(tokens) => {
-        console.log('onKeycloakTokens', tokens);
-      }}
-    >
-      <App />
-    </KeycloakProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <AppRouter />
+  </React.StrictMode>
 );
+
+ReactDOM.render(<Root />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
