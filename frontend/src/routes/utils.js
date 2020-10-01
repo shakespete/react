@@ -4,6 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useKeycloak } from '@react-keycloak/web';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import AppLayout from '../layouts';
 
 const PrivateRoute = ({ component: Component }) => {
   const [keycloak, initialized] = useKeycloak();
@@ -32,7 +33,9 @@ const PrivateRoute = ({ component: Component }) => {
     <Route
       render={(props) =>
         keycloak?.authenticated ? (
-          <Component {...props} />
+          <AppLayout>
+            <Component {...props} />
+          </AppLayout>
         ) : (
           <Redirect to="/login" />
         )

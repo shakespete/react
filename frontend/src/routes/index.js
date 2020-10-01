@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Layout from '../layouts';
+import KeycloakContainer from '../keycloak';
 
 import HomePage from '../pages/Home';
 import LoginPage from '../pages/Auth';
@@ -16,13 +16,13 @@ import PrivateRoute from './utils';
 const AppRouter = () => {
   return (
     <Router>
-      <Layout>
+      <KeycloakContainer>
         <Switch>
           <Redirect exact from="/" to="/home" />
           <PrivateRoute exact path="/home" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
         </Switch>
-      </Layout>
+      </KeycloakContainer>
     </Router>
   );
 };

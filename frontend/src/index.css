@@ -1,0 +1,19 @@
+@import '~antd/dist/antd.css';
+
+.ant-layout-header {
+  /* 001529 */
+  background: #55b72e;
+}
+.ant-layout-sider,
+.ant-layout-sider-trigger {
+  background: #55b72e;
+}
+.ant-menu {
+  background: #55b72e;
+}
+
+.ant-menu-item,
+.ant-menu-item-selected {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
