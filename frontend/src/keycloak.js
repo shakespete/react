@@ -28,8 +28,12 @@ const KeycloakContainer = ({ children }) => {
   });
 
   const keycloakEventHandler = (ev, err) => {
+    if (err) {
+      console.log(err);
+      // Pete: Redirect to 404 page
+    }
     if (ev === 'onReady') {
-      localStorage.setItem('token', keycloakClient.token);
+      localStorage.setItem('token', keycloak.token);
       localStorage.setItem('userId', keycloakClient.subject);
     }
   };

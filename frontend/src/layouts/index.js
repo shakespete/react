@@ -13,7 +13,7 @@ const { SubMenu } = Menu;
 const AppLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
 
-  const collapseHandler = (collapsed) => {
+  const collapseHandler = () => {
     setCollapsed((prevCollapsed) => !prevCollapsed);
   };
 

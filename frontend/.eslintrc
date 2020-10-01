@@ -15,6 +15,16 @@
   "plugins": ["eslint-plugin-prettier", "eslint-plugin-react"],
   "extends": [
     "plugin:react/recommended",
+    "eslint:recommended",
     "plugin:prettier/recommended" // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
-  ]
+  ],
+  "rules": {
+    "no-useless-escape": 1,
+    "react/prop-types": 1,
+    "no-param-reassign": 1,
+    "no-unused-vars": 1,
+    "no-undefined": 1,
+    "no-console": 0,
+    "no-undef": 0
+  }
 }
