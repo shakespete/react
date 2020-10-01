@@ -5,7 +5,7 @@ import { useKeycloak } from '@react-keycloak/web';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
-const PrivateRoute = ({ Component, ...rest }) => {
+const PrivateRoute = ({ component: Component }) => {
   const [keycloak, initialized] = useKeycloak();
   if (!initialized) {
     return (
@@ -30,7 +30,6 @@ const PrivateRoute = ({ Component, ...rest }) => {
 
   return (
     <Route
-      {...rest}
       render={(props) =>
         keycloak?.authenticated ? (
           <Component {...props} />
@@ -42,8 +41,12 @@ const PrivateRoute = ({ Component, ...rest }) => {
   );
 };
 
+PrivateRoute.defaultProps = {
+  component: null,
+};
+
 PrivateRoute.propTypes = {
-  Component: PropTypes.elementType.isRequired,
+  component: PropTypes.elementType,
 };
 
 export default PrivateRoute;

@@ -40,7 +40,7 @@ const Layout = ({ children }) => {
       initConfig={keycloakProviderInitConfig}
       onEvent={keycloakEventHandler}
     >
-      <>{children}</>
+      {children}
     </KeycloakProvider>
   );
 };

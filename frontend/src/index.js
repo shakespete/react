@@ -4,11 +4,7 @@ import ReactDOM from 'react-dom';
 import AppRouter from './routes';
 import * as serviceWorker from './serviceWorker';
 
-const Root = () => (
-  <React.StrictMode>
-    <AppRouter />
-  </React.StrictMode>
-);
+const Root = () => <AppRouter />;
 
 ReactDOM.render(<Root />, document.getElementById('root'));
 
