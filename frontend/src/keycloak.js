@@ -4,7 +4,7 @@ import Keycloak from 'keycloak-js';
 import { KeycloakProvider } from '@react-keycloak/web';
 import { useHistory } from 'react-router-dom';
 
-import LoginPage from './pages/Auth';
+import LoginPage from './pages/auth';
 
 const KeycloakContainer = ({ children }) => {
   let history = useHistory();
@@ -33,8 +33,9 @@ const KeycloakContainer = ({ children }) => {
       // Pete: Redirect to 404 page
     }
     if (ev === 'onReady') {
-      localStorage.setItem('token', keycloak.token);
+      localStorage.setItem('token', keycloakClient.token);
       localStorage.setItem('userId', keycloakClient.subject);
+      console.log(keycloakClient.resourceAccess);
     }
   };
 
