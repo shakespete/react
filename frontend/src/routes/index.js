@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -21,7 +22,7 @@ const AppRouter = () => {
           <Redirect exact from="/" to="/home" />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/error/404" component={Error404} />
-          {routeList.map(({ key, path, Component, exact }) => (
+          {routeList.map(({ path, Component, exact }) => (
             <PrivateRoute
               key
               path={path}
@@ -29,7 +30,7 @@ const AppRouter = () => {
               component={(props) => {
                 return (
                   <Suspense fallback={null}>
-                    <Component {...props} />
+                    <Component key={props.location.pathname} {...props} />
                   </Suspense>
                 );
               }}

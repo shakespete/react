@@ -2,7 +2,6 @@ import { lazy } from 'react';
 
 const routeList = [
   {
-    key: '1',
     name: 'Home',
     path: '/home',
     Component: lazy(() => import('pages/home')),
@@ -10,7 +9,6 @@ const routeList = [
     roles: [],
   },
   {
-    key: '2',
     name: 'Sites',
     path: '/management/sites',
     Component: lazy(() => import('pages/management/sites')),
@@ -18,7 +16,6 @@ const routeList = [
     roles: [],
   },
   {
-    key: '3',
     name: 'Tenants',
     path: '/management/tenants',
     Component: lazy(() => import('pages/management/tenants')),
@@ -26,7 +23,6 @@ const routeList = [
     roles: ['get-tenant'],
   },
   {
-    key: '4',
     name: 'Users',
     path: '/management/users',
     Component: lazy(() => import('pages/management/users')),
@@ -34,7 +30,6 @@ const routeList = [
     roles: [],
   },
   {
-    key: '5',
     name: 'Manage Assets',
     path: '/assets',
     Component: lazy(() => import('pages/assets')),
@@ -42,7 +37,6 @@ const routeList = [
     roles: ['get-asset'],
   },
   {
-    key: '6',
     name: 'Manage Locations',
     path: '/locations',
     Component: lazy(() => import('pages/locations')),
@@ -50,7 +44,6 @@ const routeList = [
     roles: [],
   },
   {
-    key: '7',
     name: 'Manage Brands',
     path: '/brands',
     Component: lazy(() => import('pages/brands')),
