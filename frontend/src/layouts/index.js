@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { useKeycloak } from '@react-keycloak/web';
 import { Link, useHistory } from 'react-router-dom';
-import logo from '../images/invertigro-logo.png';
+import logo from 'images/invertigro-logo.png';
 import {
   AreaChartOutlined,
   HddOutlined,
@@ -45,7 +45,13 @@ const AppLayout = ({ children }) => {
         <Header style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Logo src={logo} alt="Logo" />
           {keycloak?.authenticated ? (
-            <div style={{ verticalAlign: 'middle', fontSize: '20px' }}>
+            <div
+              style={{
+                verticalAlign: 'middle',
+                fontSize: '20px',
+                color: '#55b72e',
+              }}
+            >
               <LogoutOutlined onClick={logoutHandler} />
             </div>
           ) : (
@@ -69,13 +75,13 @@ const AppLayout = ({ children }) => {
                 </Menu.Item>
               </SubMenu>
               <SubMenu key="sub2" icon={<TeamOutlined />} title="Admin">
-                <Menu.Item key="4">
+                <Menu.Item key="2">
                   <Link to="/management/sites">Sites</Link>
                 </Menu.Item>
-                <Menu.Item key="5">
+                <Menu.Item key="3">
                   <Link to="/management/tenants">Tenants</Link>
                 </Menu.Item>
-                <Menu.Item key="6">
+                <Menu.Item key="4">
                   <Link to="/management/users">Users</Link>
                 </Menu.Item>
               </SubMenu>
@@ -84,10 +90,10 @@ const AppLayout = ({ children }) => {
                 icon={<HddOutlined />}
                 title="Assets and Locations"
               >
-                <Menu.Item key="7">
+                <Menu.Item key="5">
                   <Link to="/assets">Manage Assets</Link>
                 </Menu.Item>
-                <Menu.Item key="8">
+                <Menu.Item key="6">
                   <Link to="/locations">Manage Locations</Link>
                 </Menu.Item>
               </SubMenu>
@@ -96,7 +102,7 @@ const AppLayout = ({ children }) => {
                 icon={<ReconciliationOutlined />}
                 title="Inventory"
               >
-                <Menu.Item key="9">
+                <Menu.Item key="7">
                   <Link to="/brands">Manage Brands</Link>
                 </Menu.Item>
               </SubMenu>

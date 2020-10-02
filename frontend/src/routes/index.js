@@ -1,42 +1,40 @@
-import * as React from 'react';
+import React, { Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
+import KeycloakContainer from 'keycloak';
 
-import KeycloakContainer from '../keycloak';
-
-import LoginPage from '../pages/auth';
-import HomePage from '../pages/home';
-import SitesPage from '../pages/management/sites';
-import TenantsPage from '../pages/management/tenants';
-import UsersPage from '../pages/management/users';
-import AssetsPage from '../pages/assets';
-import LocationsPage from '../pages/locations';
-import BrandsPage from '../pages/brands';
-
+import LoginPage from 'pages/auth';
+import Error404 from 'pages/error';
 import PrivateRoute from './utils';
+import routeList from 'routes/list';
 
 const AppRouter = () => {
+  console.log(routeList);
   return (
     <Router>
       <KeycloakContainer>
         <Switch>
           <Redirect exact from="/" to="/home" />
           <Route exact path="/login" component={LoginPage} />
-          <PrivateRoute exact path="/home" component={HomePage} />
-          <PrivateRoute exact path="/management/sites" component={SitesPage} />
-          <PrivateRoute
-            exact
-            path="/management/tenants"
-            component={TenantsPage}
-          />
-          <PrivateRoute exact path="/management/users" component={UsersPage} />
-          <PrivateRoute exact path="/assets" component={AssetsPage} />
-          <PrivateRoute exact path="/locations" component={LocationsPage} />
-          <PrivateRoute exact path="/brands" component={BrandsPage} />
+          <Route exact path="/error/404" component={Error404} />
+          {routeList.map(({ key, path, Component, exact }) => (
+            <PrivateRoute
+              key
+              path={path}
+              exact={exact}
+              component={(props) => {
+                return (
+                  <Suspense fallback={null}>
+                    <Component {...props} />
+                  </Suspense>
+                );
+              }}
+            />
+          ))}
         </Switch>
       </KeycloakContainer>
     </Router>
