@@ -1,0 +1,3 @@
+[submodule "fundamentals/react-fundamentals"]
+	path = fundamentals/react-fundamentals
+	url = https://github.com/shakespete/react
