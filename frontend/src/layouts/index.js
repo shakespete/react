@@ -24,6 +24,7 @@ const { SubMenu } = Menu;
 
 const AppLayout = ({ children }) => {
   let history = useHistory();
+  console.log(history); // Fix routing auto-select of menu
   const { keycloak } = useKeycloak();
   const [collapsed, setCollapsed] = useState(false);
 
