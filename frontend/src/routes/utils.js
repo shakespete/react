@@ -8,6 +8,7 @@ import AppLayout from '../layouts';
 
 const PrivateRoute = ({ component: Component }) => {
   const [keycloak, initialized] = useKeycloak();
+
   if (!initialized) {
     return (
       <div
@@ -31,8 +32,8 @@ const PrivateRoute = ({ component: Component }) => {
 
   return (
     <Route
-      render={(props) =>
-        keycloak?.authenticated ? (
+      render={props =>
+        keycloak.authenticated ? (
           <AppLayout>
             <Component {...props} />
           </AppLayout>

@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react';
-import { useHistory } from 'react-router-dom';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -14,7 +13,6 @@ import PrivateRoute from './utils';
 import routeList from 'routes/list';
 
 const AppRouter = () => {
-  console.log(routeList);
   return (
     <Router>
       <KeycloakContainer>
@@ -27,7 +25,7 @@ const AppRouter = () => {
               key
               path={path}
               exact={exact}
-              component={(props) => {
+              component={props => {
                 return (
                   <Suspense fallback={null}>
                     <Component key={props.location.pathname} {...props} />

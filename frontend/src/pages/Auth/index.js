@@ -31,7 +31,7 @@ const StyledForm = styled(Form)`
 const RealmLogin = () => {
   localStorage.removeItem('realm');
 
-  const onFinish = (values) => {
+  const onFinish = values => {
     localStorage.setItem('realm', values.realm);
     window.location.assign('/');
   };
