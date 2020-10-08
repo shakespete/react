@@ -18,8 +18,10 @@
   let div = document.createElement('div')
   div.textContent = 'Hello World'
   div.className = 'container'
-  document.getElementById('root').append(div)
+
+  let root = document.createElement('div')
+  root.id = 'root'
+  document.body.append(root)
+  root.append(div)
 </script>
-<body>
-  <div id="root"></div>
-</body>
+<body></body>
