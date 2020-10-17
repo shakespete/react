@@ -8,14 +8,10 @@
   <script src="https://unpkg.com/@babel/standalone@7.9.3/babel.js"></script>
 
   <script type="text/babel">
-    const element = <div className="container">Hello World!</div>
-
-    // 💰 there are a few subtle differences between JSX and HTML. One such
-    // difference is how you apply a class to an element in JSX is by using
-    // `className` rather than `class`!
-    // 📜 You can learn the differences between JSX and HTML syntax from the React docs here:
-    // https://reactjs.org/docs/dom-elements.html#differences-in-attributes
-
+    const children = 'Hello World'
+    const className = 'container'
+    const props = {children, className}
+    const element = <div {...props} /> // how do I apply props to this div?
     ReactDOM.render(element, document.getElementById('root'))
   </script>
 </body>
