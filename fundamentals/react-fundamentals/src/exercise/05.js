@@ -13,12 +13,12 @@ const smallBox = (
   </div>
 )
 const mediumBox = (
-  <di
+  <div
     className="box box--medium"
     style={{backgroundColor: 'pink', fontStyle: 'italic'}}
   >
     medium pink box
-  </di>
+  </div>
 )
 const largeBox = (
   <div
