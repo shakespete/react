@@ -4,37 +4,29 @@
 import React, {useState} from 'react'
 
 const UsernameForm = ({onSubmitUsername}) => {
-  const [isValid, setIsValid] = useState(true)
+  const [inputVal, setInputVal] = useState('')
 
   const handleChange = e => {
     const {value} = e.target
-    const valid = value === value.toLowerCase()
-
-    setIsValid(valid)
+    setInputVal(value.toLowerCase())
   }
 
   const handleSubmit = event => {
     event.preventDefault()
-    onSubmitUsername(event.target.elements.username.value)
+    onSubmitUsername(inputVal)
   }
-
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="username">Username:</label>
-        <input id="username" type="text" onChange={handleChange} />
-        {isValid ? null : (
-          <div
-            role="alert"
-            style={{color: 'red', fontSize: '12px', marginLeft: '80px'}}
-          >
-            'Username must be lower case'
-          </div>
-        )}
+        <input
+          id="username"
+          type="text"
+          onChange={handleChange}
+          value={inputVal}
+        />
       </div>
-      <button type="submit" disabled={!Boolean(isValid)}>
-        Submit
-      </button>
+      <button type="submit">Submit</button>
     </form>
   )
 }
