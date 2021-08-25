@@ -24,7 +24,18 @@ function CounterProvider({step = 1, initialCount = 0, ...props}) {
     {count: initialCount},
   )
 
-  return <CounterContext.Provider value={[state, dispatch]} {...props} />
+  // Helper functions:
+  const increment = React.useCallback(
+    () => dispatch({type: 'increment'}),
+    [dispatch],
+  )
+  const decrement = React.useCallback(
+    () => dispatch({type: 'decrement'}),
+    [dispatch],
+  )
+
+  const value = {state, increment, decrement}
+  return <CounterContext.Provider value={value} {...props} />
 }
 
 function useCounter() {
@@ -41,9 +52,12 @@ function useCounter() {
 // import {useCounter} from 'context/counter'
 
 function Counter() {
-  const [state, dispatch] = useCounter()
-  const increment = () => dispatch({type: 'increment'})
-  const decrement = () => dispatch({type: 'decrement'})
+  const {state, increment, decrement} = useCounter()
+
+  // Moved into CounterProvider:
+  // const increment = () => dispatch({type: 'increment'})
+  // const decrement = () => dispatch({type: 'decrement'})
+
   return (
     <div>
       <div>Current Count: {state.count}</div>
