@@ -26,7 +26,10 @@ function Toggle({children}) {
 // ToggleContext now
 // 🦉 You can create a helper method to retrieve the context here. Thanks to that,
 // your context won't be exposed to the user
-const useToggle = () => React.useContext(ToggleContext)
+const useToggle = () => {
+  const context = React.useContext(ToggleContext)
+  if (!context) throw new Error('useToggle must have parent context Toggle')
+}
 // 📜 https://reactjs.org/docs/hooks-reference.html#usecontext
 function ToggleOn({children}) {
   const {on} = useToggle()
@@ -45,19 +48,7 @@ function ToggleButton({...props}) {
   return <Switch on={on} onClick={toggle} {...props} />
 }
 
-function App() {
-  return (
-    <div>
-      <Toggle>
-        <ToggleOn>The button is on</ToggleOn>
-        <ToggleOff>The button is off</ToggleOff>
-        <div>
-          <ToggleButton />
-        </div>
-      </Toggle>
-    </div>
-  )
-}
+const App = () => <ToggleButton />
 
 export default App
 
