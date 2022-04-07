@@ -4,5 +4,5 @@
 
 
 <p align="center">
-  <img src="https://github.com/shakespete/shakespete/blob/main/bacon_jake.gif" width="350" height="auto">
+  <img src="https://github.com/shakespete/react/blob/dev/TS/images/type_hierarchy.png" width="700" height="auto">
 </p>
