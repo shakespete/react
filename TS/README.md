@@ -56,6 +56,41 @@ If you have two types A and B, and B is a subtype of A, then you can safely use 
   <img src="https://github.com/shakespete/react/blob/dev/TS/images/sub_super.png" width="400" height="auto">
 </p>
 
+When we pass a shape with a property whose type is a supertype of the expected type, TypeScript complains.
+
+TypeScript’s behavior is as follows: if you expect a shape, you can also pass a type with property types that are **subtypes** of their expected types, but you cannot pass a shape with property types that are supertypes of their expected types. When talking about types, we say that TypeScript shapes (objects and classes) are **covariant** in their property types. That is, for an object A to be assignable to an object B, each of its properties must be subtypes its corresponding property in B.
+
+More generally, covariance is just one of four sorts of variance:
+
+**Invariance**<br />You want exactly a T.
+
+**Covariance**<br />You want a subtype of T.
+
+**Contravariance**<br />You want a supertype of T.
+
+**Bivariance**<br />You’re OK with either subtype of T or supertype of T.
+
+In TypeScript, every complex type is covariant in its members—objects, classes, arrays, and function return types—with one exception: function parameter types, which are contravariant.
+
+### Function Variance
+
+A function A is a **subtype** of function B if A has the same or lower arity (number of parameters) than B and:
+
+1. A’s *this* type either isn’t specified, or is a **supertype** of B’s *this* type.
+2. Each of A’s parameters is a **supertype** of its corresponding parameter in B.
+3. A’s return type is a **subtype** of B’s return type.
+
+### Assignability
+
+When TypeScript wants to answer the question “Is type A assignable to type B?” it follows a few simple rules. For non-enum types—like arrays, booleans, numbers, objects, functions, classes, class instances, and strings, including literal types—A is assignable to B if either of the following is true:
+
+1. A is a **subtype** of B.
+2. A is any.
+
+For enum types created with the enum or const enum keywords, a type A is assignable to an enum B if either of these is true:
+
+1. A is a member of enum B.
+2. B has at least one member that’s a number, and A is a number.
 
 ## Objects
 
