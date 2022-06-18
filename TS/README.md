@@ -7,7 +7,19 @@
   <img src="https://github.com/shakespete/react/blob/dev/TS/images/type_hierarchy.png" width="700" height="auto">
 </p>
 
-### Objects
+### Union and Intersection
+
+If you have two things A and B, the union of those things is their sum (everything in A or B or both), and the intersection is what they have in common (everything in both A and B).
+
+<p align="center">
+  <img src="https://github.com/shakespete/react/blob/dev/TS/images/union_intersection.png" width="700" height="auto">
+</p>
+
+
+## Objects
+
+JavaScript is generally structurally typed, so TypeScript favors that style of programming over a nominally typed style.
+**Structural Typing** is a style of programming where you just care that an object has certain properties, and not what its name is (*nominal typing*).
 
 ```
 let a: {
@@ -19,9 +31,13 @@ let a: {
 
 The [key: T]: U syntax is called an **index signature**, and this is the way you tell TypeScript that the given object might contain more keys. The way to read it is, “For this object, all keys of type T must have values of type U.” Index signatures let you safely add more keys to an object, in addition to any keys that you explicitly declared.
 
-There is one rule to keep in mind for index signatures: the index signature key’s type (T) must be assignable to either number or string.2
+There is one rule to keep in mind for index signatures: the index signature key’s type (T) must be assignable to either number or string.
 
 Also note that you can use any word for the index signature key’s name—it doesn’t have to be key.
+
+Object literal syntax says, “Here is a thing that has this shape.” The thing might be an object literal, or it might be a class. object is a little narrower than any, but not by much. object doesn’t tell you a lot about the value it describes, just that the value is a JavaScript object (and that it’s not null).
+
+Object literal notation has one special case: empty object types ({}). Every type—except null and undefined—is assignable to an empty object type, which can make it tricky to use. Try to avoid empty object types when possible.
 
 ## Functions
 
