@@ -15,6 +15,47 @@ If you have two things A and B, the union of those things is their sum (everythi
   <img src="https://github.com/shakespete/react/blob/dev/TS/images/union_intersection.png" width="700" height="auto">
 </p>
 
+A union type describes a value that can be one of several types. We use the vertical bar (|) to separate each type, so number | string | boolean is the type of a value that can be a number, a string, or a boolean. A value with a union type (|) isn’t necessarily one specific member of your union; in fact, it can be both members at once.
+
+An intersection type combines multiple types into one. This allows you to add together existing types to get a single type that has all the features you need.
+
+### Types vs Interfaces
+
+Like type aliases, interfaces are a way to name a type so you don’t have to define it inline. Type aliases and interfaces are mostly two syntaxes for the same thing (like function expressions and function declarations), but there are a few small differences.
+
+**What are the differences between types and interfaces? There are three:**
+
+1. The first is that type aliases are more general, in that their righthand side can be any type, including a type expression (a type, and maybe some type operators like & or |); for an interface, the righthand side must be a shape. For example, there is no way to rewrite the following type aliases as interfaces:
+```
+type A = number
+type B = A | string
+```
+
+2. The second difference is that when you extend an interface, TypeScript will make sure that the interface you’re extending is assignable to your extension. For example:
+```
+interface A {
+  good(x: number): string
+  bad(x: number): string
+}
+
+interface B extends A {
+  good(x: string | number): string
+  bad(x: string): string  // Error TS2430: Interface 'B' incorrectly extends
+}                         // interface 'A'. Type 'number' is not assignable
+                          // to type 'string'.
+```
+This is not the case when you use intersection types: if you turn the interfaces above into type aliases and the extends into an intersection (&), TypeScript will do its best to combine your extension with the type it’s extending, resulting in an overloaded signature for bad instead of a compile-time error.
+
+3. The third difference is that multiple interfaces with the same name in the same scope are automatically merged; multiple type aliases with the same name in the same scope will throw a compile-time error. This is a feature called declaration merging. (Declaration merging is TypeScript’s way of automatically combining multiple declarations that share the same name.)
+
+### Subtypes and Supertypes
+
+If you have two types A and B, and B is a subtype of A, then you can safely use a B anywhere an A is required:
+
+<p align="center">
+  <img src="https://github.com/shakespete/react/blob/dev/TS/images/sub_super.png" width="400" height="auto">
+</p>
+
 
 ## Objects
 
@@ -166,6 +207,9 @@ function map<T, U>(array: T[], f: (item: T) => U): U[] {
 
 We need exactly two generic types: T for the type of the array members going in, and U for the type of the array members going out. We pass in an array of Ts, and a mapping function that takes a T and maps it to a U. Finally, we return an array of Us.
 
+Generally, TypeScript will bind concrete types to your generic when you use the generic: for functions, it’s when you call them; for classes, it’s when you instantiate them; and for type aliases and interfaces, it’s when you use or implement them.
+
+
 
 ### Generic Type Interface
 ```
@@ -204,6 +248,48 @@ triggerEvent({ // T is Element | null
 3. TypeScript notices that the target field of the object we passed is document.querySelector('#myButton'). That implies that T must be whatever type document.querySelector('#myButton') is: Element | null. So T is now bound to Element | null.
 4. TypeScript goes through and replaces every occurrence of T with Element | null.
 5. TypeScript checks that all of our types satisfy assignability. They do, so our code typechecks.
+
+### Bounded Polymorphism
+
+Sometimes, saying “this thing is of some generic type T and that thing has to have the same type T" just isn’t enough. Sometimes you also want to say “the type U should be at least T.” We call this putting an upper bound on U.
+
+```
+type TreeNode = {
+  value: string
+}
+type LeafNode = TreeNode & {
+  isLeaf: true
+}
+type InnerNode = TreeNode & {
+  children: [TreeNode] | [TreeNode, TreeNode]
+}
+```
+
+Now pause, and think about how you might write a mapNode function that takes a subtype of TreeNode and returns that same subtype. Passing in a LeafNode should return a LeafNode, an InnerNode should return an InnerNode, and a TreeNode should return a TreeNode.
+
+```
+function mapNode<T extends TreeNode>(
+  node: T,
+  f: (value: string) => string
+): T {
+  return {
+    ...node,
+    value: f(node.value)
+  }
+}
+```
+
+1. mapNode is a function that defines a single generic type parameter, T. T has an upper bound of TreeNode. That is, T can be either a TreeNode, or a subtype of TreeNode.
+2. mapNode takes two parameters, the first of which is a node of type T. Because in 1 we said node extends TreeNode, if we passed in something that’s not a TreeNode—say, an empty object {}, null, or an array of TreeNodes—that would be an instant red squiggly. node has to be either a TreeNode or a subtype of TreeNode.
+3. mapNode returns a value of type T. Remember that T might be a TreeNode, or any subtype of TreeNode.
+
+Why did we have to declare T that way?
+
+If we had typed T as just T (leaving off extends TreeNode), then mapNode would have thrown a compile-time error, because you can’t safely read node.value on an unbounded node of type T (what if a user passes in a number?).
+
+If we had left off the T entirely and declared mapNode as (node: TreeNode, f: (value: string) => string) => TreeNode, then we would have lost information after mapping a node: a1, b1, and c1 would all just be TreeNodes.
+
+By saying that T extends TreeNode, we get to preserve the input node’s specific type (TreeNode, LeafNode, or InnerNode), even after mapping it.
 
 
 ---
