@@ -326,6 +326,14 @@ If we had left off the T entirely and declared mapNode as (node: TreeNode, f: (v
 
 By saying that T extends TreeNode, we get to preserve the input node’s specific type (TreeNode, LeafNode, or InnerNode), even after mapping it.
 
+# React Typescript
+  
+## JSX.Element vs React.ReactNode
+
+A technical explanation is that a valid React node is **not** the same thing as what is returned by React.createElement. Regardless of what a component ends up rendering, **React.createElement always returns an object**, which is the JSX.Element interface, but **React.ReactNode is the set of all possible return values of a component**.
+
+JSX.Element -> Return value of React.createElement<br />
+React.ReactNode -> Return value of a component
 
 ---
 Sources:
