@@ -204,6 +204,47 @@ TypeScript infers T from the type we pass in for array. Once TypeScript infers w
 
 The funny-looking angle brackets, <>, are how you declare generic type parameters (think of them like the type keyword, but for generic types); where you place the angle brackets scopes the generics (there are just a few places you can put them), and TypeScript makes sure that within their scope, all instances of the generic type parameters are eventually bound to the same concrete types. Because of where the angle brackets are in this example, TypeScript will bind concrete types to our generic T when we call filter. And it will decide which concrete type to bind to T depending on what we called filter with. You can declare as many comma-separated generic type parameters as you want between a pair of angle brackets.
 
+Here's another example:
+
+```
+type ListProps<ItemType> = {
+  items: ItemType[];
+};
+
+function list<ItemType>({ items }: ListProps<ItemType>) {
+  for (const it of items) console.log(it);
+}
+
+const it1 = {
+  items: [{ a: 'hello', b: 'there' }, { a: 'general', b: 'kenobi' }],
+};
+
+list(it1);
+// { a: 'hello', b: 'there' }
+// { a: 'general', b: 'kenobi' }
+
+const it2 = {
+  items: [
+    { x: 'hello' },
+    { x: 'there' }
+  ],
+};
+
+list(it2);
+// { x: 'hello' }
+// { x: 'there' }
+
+const it3 = {
+  items: [
+    'hello', 'there'
+  ]
+}
+
+list(it3);
+// hello
+// there
+```
+
 Like a function’s parameter gets re-bound every time you call that function, so each call to filter gets its own binding for T:
 
 ```
