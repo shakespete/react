@@ -5,7 +5,9 @@
 import * as React from 'react'
 
 type CountContextType = [number, React.Dispatch<React.SetStateAction<number>>]
-const CountContext = React.createContext<CountContextType>(undefined)
+const CountContext = React.createContext<CountContextType | undefined>(
+  undefined,
+)
 
 function CountProvider({children}: {children: React.ReactNode}) {
   const [count, setCount] = React.useState(0)

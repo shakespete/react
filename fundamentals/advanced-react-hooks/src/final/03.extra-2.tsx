@@ -21,8 +21,9 @@ type PokemonCacheContextType = [
   PokemonCacheState,
   React.Dispatch<PokemonCacheAction>,
 ]
-const PokemonCacheContext =
-  React.createContext<PokemonCacheContextType>(undefined)
+const PokemonCacheContext = React.createContext<
+  PokemonCacheContextType | undefined
+>(undefined)
 
 type PokemonCacheAction = {
   type: 'ADD_POKEMON'
