@@ -145,7 +145,13 @@ We use useEffect when a render needs to cause side effects. Think of a side effe
 
 Every time we render, useEffect has access to the latest values from that render: props, state, refs, etc. Think of useEffect as being a function that happens after a render. When a render fires, we can take a look at that render’s values and use them in the effect. Then once we render again, the whole thing starts over. New values, then new renders, then new effects.
 
-An empty dependency array causes the effect to only be invoked once after the initial render. Since there are no dependencies in the array, the effect is invoked for the initial render. No dependencies means no changes, so the effect will never be invoked again. Effects that are only invoked on the first render are extremely useful for initialization. If you return a function from the effect, the function will be invoked when the component is removed from the tree.
+Effects that are only invoked on the first render are extremely useful for initialization. If you return a function from the effect, the function will be invoked when the component is removed from the tree.
+
+Giving it an empty array acts like componentDidMount as in, it only runs once. An empty dependency array causes the effect to only be invoked once after the initial render.
+
+Giving it no second argument acts as both componentDidMount and componentDidUpdate, as in it runs first on mount and then on every re-render.
+
+Giving it an array as second argument with any value inside will only execute the code inside your useEffect hook ONCE on mount, as well as whenever that particular variable changes.
 
 <h3>memo</h3>
 The memo function can be used to create a component that will only render when its properties change. The second argument sent to the memo function is a predicate. A predicate is a function that only returns true or false. The predicate receives the previous properties and the next properties. React.memo is only for function components.
